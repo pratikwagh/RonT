@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "139258939931",
+    "firebase_url": "https://ront-f35af.firebaseio.com",
+    "project_id": "ront-f35af",
+    "storage_bucket": "ront-f35af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139258939931:android:8a0c6a6d63d9b8ff",
+        "android_client_info": {
+          "package_name": "myapplication2.com.ront"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139258939931-307q4hkuf46j3troe51v0cjtm84ps0jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "myapplication2.com.ront",
+            "certificate_hash": "5629b1dca0f1b094864b87cf8d6011096d44d237"
+          }
+        },
+        {
+          "client_id": "139258939931-1b6l4fh4q6ku8371o1r1ojg10ocv57v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "myapplication2.com.ront",
+            "certificate_hash": "179f73ad77cb356662ac4dc9c921e91eecc82011"
+          }
+        },
+        {
+          "client_id": "139258939931-6urgvnhfbrvvslpcu6564h2tibooje1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgiBfLOgx3DNmlcIucIBk8ave-piwxogs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139258939931-6urgvnhfbrvvslpcu6564h2tibooje1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

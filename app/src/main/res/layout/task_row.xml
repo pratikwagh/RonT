@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Watch Anime"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:id="@+id/taskName"
+        />
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="15 Feburary"
+        android:textSize="15dp"
+        android:id="@+id/taskDate"
+        android:layout_below="@id/taskName"
+        />
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text=" 12:08 PM"
+        android:textSize="15dp"
+        android:id="@+id/taskTime"
+        android:layout_toRightOf="@id/taskDate"
+        android:layout_below="@id/taskName"
+
+        />
+
+</RelativeLayout>
