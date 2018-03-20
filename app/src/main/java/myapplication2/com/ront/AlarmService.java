@@ -31,7 +31,7 @@ public class AlarmService extends IntentService {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+                new Intent(this, EventActivity.class), 0);
 
         NotificationCompat.Builder alamNotificationBuilder = new NotificationCompat.Builder(
                 this, NOTIFICATION_CHANNEL_ID).setContentTitle("Alarm").setSmallIcon(R.mipmap.ic_launcher)

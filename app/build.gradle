@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:1.2.1'
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    //For adding side drawer
+    implementation 'com.android.support:design:26.1.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

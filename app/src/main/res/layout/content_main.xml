@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/content_main"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="myapplication2.com.ront.MainActivity"
+    tools:context="myapplication2.com.ront.EventActivity"
     tools:showIn="@layout/activity_main">
 
     <RelativeLayout
