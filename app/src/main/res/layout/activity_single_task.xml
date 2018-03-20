@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myapplication2.com.ront.SingleTask">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/singletask"
+            android:text="Watch Anime"
+            android:textColor="#000"
+            android:textSize="30dp"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/singledate"
+            android:text="16 February"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:id="@+id/singletime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="120dp"
+            android:text="01:20 AM" />
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+
+
+
