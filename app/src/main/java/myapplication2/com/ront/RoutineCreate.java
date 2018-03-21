@@ -1,18 +1,119 @@
 package myapplication2.com.ront;
 
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by user on 21/3/18.
  */
 
-public class RoutineCreate extends AppCompatActivity {
+public class RoutineCreate extends AppCompatActivity  {
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+
+    TimePickerDialog timePickerDialog;
+
+    TextView set_stime,set_etime;
+    EditText tname;
+
+    int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
+    String format;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine_create);
 
+        database = FirebaseDatabase.getInstance();
+
+        tname     = (EditText) findViewById(R.id.set_name);
+        set_stime = (TextView) findViewById(R.id.set_stime);
+        set_etime = (TextView) findViewById(R.id.set_etime);
+
+    }
+
+    public void addClicked(View view){
+
+        tname     = (EditText) findViewById(R.id.set_name);
+        String name = tname.getText().toString();
+        String stime = set_stime.getText().toString();
+        String etime = set_etime.getText().toString();
+
+        Log.d("Rohit","open database");
+
+        myRef = database.getInstance().getReference().child("Tasks");
+
+        DatabaseReference newTask = myRef.push();
+        newTask.child("name").setValue(name);
+        newTask.child("date").setValue(stime);
+        newTask.child("time").setValue(etime);
+        Log.d("Rohit","push database");
+
+        Intent in = new Intent(RoutineCreate.this,Monday.class);
+        startActivity(in);
+
+
+
+    }
+
+    public void setsTime(View view){
+        timePickerDialog =new TimePickerDialog(RoutineCreate.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                phr=hourOfDay;
+                pmin=minute;
+                selectedTimeFormat(hourOfDay,minute);
+                set_stime.setText(hourOfDay + " : " + minute + " " + format );
+
+            }
+        }, hour, minute, false);
+        timePickerDialog.show();
+
+    }
+
+
+    public void seteTime(View view){
+        timePickerDialog =new TimePickerDialog(RoutineCreate.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                phr=hourOfDay;
+                pmin=minute;
+                selectedTimeFormat(hourOfDay,minute);
+                set_etime.setText(hourOfDay + " : " + minute + " " + format );
+
+            }
+        }, hour, minute, false);
+        timePickerDialog.show();
+
+    }
+
+
+    public void selectedTimeFormat(int hour,int min){
+
+        if(hour == 0){
+            hour += 12;
+            format = "AM";
+        }
+        else if(hour == 12){
+            format ="PM";
+        }
+        else if(hour > 12){
+            hour -= 12;
+            format = "PM";
+        }
+        else {
+            format = "AM";
+        }
     }
 }
