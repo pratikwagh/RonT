@@ -38,6 +38,8 @@
         <activity android:name=".RoutineActivity"
             android:parentActivityName=".HomeActivity"></activity>
 
+        <activity android:name=".SignUpActivity"></activity>
+
 
 
         <service
