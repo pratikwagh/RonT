@@ -46,6 +46,7 @@ public class Monday extends Fragment
             public void onClick(View view) {
 
                 Intent a = new Intent(getActivity(), RoutineCreate.class);
+                a.putExtra("value", 0);
                 startActivity(a);
 
             }

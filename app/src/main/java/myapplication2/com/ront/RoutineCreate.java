@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -26,9 +27,11 @@ public class RoutineCreate extends AppCompatActivity  {
 
     TextView set_stime,set_etime;
     EditText tname;
+    Button back;
 
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format;
+    int value;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,21 @@ public class RoutineCreate extends AppCompatActivity  {
         tname     = (EditText) findViewById(R.id.set_name);
         set_stime = (TextView) findViewById(R.id.set_stime);
         set_etime = (TextView) findViewById(R.id.set_etime);
+
+        final Intent intent = new Intent(getIntent());
+        value = intent.getIntExtra("value", -1);
+
+        back= (Button) findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(RoutineCreate.this,RoutineActivity.class);
+                i.putExtra("value",value);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -60,9 +78,9 @@ public class RoutineCreate extends AppCompatActivity  {
         newTask.child("time").setValue(etime);
         Log.d("Rohit","push database");
 
-        Intent in = new Intent(RoutineCreate.this,Monday.class);
-        startActivity(in);
-
+        Intent intent = new Intent(RoutineCreate.this,RoutineActivity.class);
+        intent.putExtra("value",value);
+        startActivity(intent);
 
 
     }

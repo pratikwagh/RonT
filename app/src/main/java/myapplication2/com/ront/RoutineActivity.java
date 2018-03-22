@@ -1,5 +1,6 @@
 package myapplication2.com.ront;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ public class RoutineActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+
+    int value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,26 @@ public class RoutineActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+
+        final Intent intent = new Intent(getIntent());
+        value = intent.getIntExtra("value", -1);
+
+        if(value == 0) {
+            mViewPager.setCurrentItem(0);
+        } else if (value == 1){
+            mViewPager.setCurrentItem(1);
+        } else if (value == 2){
+            mViewPager.setCurrentItem(2);
+        } else if (value == 3){
+            mViewPager.setCurrentItem(3);
+        } else if (value == 4){
+            mViewPager.setCurrentItem(4);
+        } else if (value == 5){
+            mViewPager.setCurrentItem(5);
+        } else if (value == 6){
+            mViewPager.setCurrentItem(6);
+        }
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -110,7 +133,7 @@ public class RoutineActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 7 total pages.
             return 7;
         }
 

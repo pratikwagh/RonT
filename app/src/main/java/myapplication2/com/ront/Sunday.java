@@ -1,6 +1,8 @@
 package myapplication2.com.ront;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +23,19 @@ public class Sunday extends Fragment
 
         // keep the fragment and all its data across screen rotation
         setRetainInstance(true);
-        View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sunday, container, false);
+
+        FloatingActionButton fab = rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent a = new Intent(getActivity(), RoutineCreate.class);
+                a.putExtra("value", 6);
+                startActivity(a);
+
+            }
+        });
 
         return rootView;
     }
