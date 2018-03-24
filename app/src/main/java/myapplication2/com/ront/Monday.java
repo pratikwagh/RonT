@@ -38,7 +38,7 @@ public class Monday extends Fragment
         mTaskList = (RecyclerView) rootView.findViewById(R.id.task_list);
         mTaskList.setHasFixedSize(true);
         mTaskList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Tasks");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Monday");
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +46,7 @@ public class Monday extends Fragment
             public void onClick(View view) {
 
                 Intent a = new Intent(getActivity(), RoutineCreate.class);
-                a.putExtra("value", 0);
+                a.putExtra("Weekday", "Monday");
                 startActivity(a);
 
             }

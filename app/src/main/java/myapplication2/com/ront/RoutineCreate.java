@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by user on 21/3/18.
  */
 
-public class RoutineCreate extends AppCompatActivity  {
+public class RoutineCreate extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -32,6 +32,7 @@ public class RoutineCreate extends AppCompatActivity  {
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format;
     int value;
+    String j;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,15 @@ public class RoutineCreate extends AppCompatActivity  {
         set_stime = (TextView) findViewById(R.id.set_stime);
         set_etime = (TextView) findViewById(R.id.set_etime);
 
-        final Intent intent = new Intent(getIntent());
-        value = intent.getIntExtra("value", -1);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
 
-        back= (Button) findViewById(R.id.back);
+        if(extras!=null)
+        {
+             j =(String) extras.get("Weekday");
+        }
+
+        back= (Button) findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +76,7 @@ public class RoutineCreate extends AppCompatActivity  {
 
         Log.d("Rohit","open database");
 
-        myRef = database.getInstance().getReference().child("Tasks");
+        myRef = database.getInstance().getReference().child(j);
 
         DatabaseReference newTask = myRef.push();
         newTask.child("name").setValue(name);
