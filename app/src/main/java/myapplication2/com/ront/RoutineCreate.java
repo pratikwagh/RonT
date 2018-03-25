@@ -31,7 +31,7 @@ public class RoutineCreate extends AppCompatActivity {
 
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format;
-    int value;
+    Integer value;
     String j;
 
 
@@ -45,8 +45,11 @@ public class RoutineCreate extends AppCompatActivity {
         set_stime = (TextView) findViewById(R.id.set_stime);
         set_etime = (TextView) findViewById(R.id.set_etime);
 
-        Intent intent = getIntent();
+        final Intent intent = new Intent(getIntent());
         Bundle extras = intent.getExtras();
+
+
+        value = intent.getIntExtra("value", -1);
 
         if(extras!=null)
         {
