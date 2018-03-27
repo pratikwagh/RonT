@@ -31,6 +31,7 @@
         <activity android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity android:name=".LogoutActivity"></activity>
         <activity android:name=".EventActivity"></activity>
         <activity android:name=".SingleTask" />
         <activity android:name=".AddTask"></activity>

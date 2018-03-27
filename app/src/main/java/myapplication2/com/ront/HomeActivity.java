@@ -50,6 +50,10 @@ public class HomeActivity extends AppCompatActivity {
                                 Intent b = new Intent(HomeActivity.this, EventActivity.class);
                                 startActivity(b);
                                 break;
+                            case R.id.logout:
+                                Intent c = new Intent(HomeActivity.this, LogoutActivity.class);
+                                startActivity(c);
+                                break;
 
                         }
 
