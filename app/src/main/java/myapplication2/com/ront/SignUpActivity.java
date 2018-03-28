@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button signup;
     private EditText emailid,password;
     private FirebaseAuth auth;
+    private AwesomeValidation awesomeValidation;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         emailid = (EditText) findViewById(R.id.editText4);
         password = (EditText) findViewById(R.id.editText6);
+
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
+        //Awesome validation
+
+        awesomeValidation.addValidation(this, R.id.editText4, Patterns.EMAIL_ADDRESS, R.string.emailiderror);
+        awesomeValidation.addValidation(this, R.id.editText6, ".{6,}", R.string.passworderror);
+
+
 
         //Initialize firebase
 
@@ -50,8 +63,10 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                signUp(emailid.getText().toString(),password.getText().toString());
+                if (awesomeValidation.validate()) {
 
+                    signUp(emailid.getText().toString(), password.getText().toString());
+                }
 
             }
         });

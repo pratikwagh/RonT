@@ -17,6 +17,8 @@
     </string>
     <string name="open" />
     <string name="close" />
+    <string name="emailiderror">Enter Valid Email-ID</string>
+    <string name="passworderror">Enter Password of Minimum 6 length</string>
 
     <string name="username">Username</string>
 
