@@ -46,13 +46,17 @@ public class HomeActivity extends AppCompatActivity {
                                 Intent a = new Intent(HomeActivity.this, RoutineActivity.class);
                                 startActivity(a);
                                 break;
-                            case R.id.event:
-                                Intent b = new Intent(HomeActivity.this, EventActivity.class);
+                            case R.id.assign:
+                                Intent b = new Intent(HomeActivity.this, AssignmentActivity.class);
                                 startActivity(b);
                                 break;
-                            case R.id.logout:
-                                Intent c = new Intent(HomeActivity.this, LogoutActivity.class);
+                            case R.id.event:
+                                Intent c = new Intent(HomeActivity.this, EventActivity.class);
                                 startActivity(c);
+                                break;
+                            case R.id.logout:
+                                Intent d = new Intent(HomeActivity.this, LogoutActivity.class);
+                                startActivity(d);
                                 break;
 
                         }

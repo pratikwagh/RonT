@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -27,6 +29,7 @@ import java.util.Calendar;
 public class AddTask extends AppCompatActivity implements View.OnClickListener {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    FirebaseUser user;
 
 
     EditText editTask;
@@ -38,7 +41,7 @@ public class AddTask extends AppCompatActivity implements View.OnClickListener {
 
     Calendar currentTime;
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
-    String format;
+    String format,u;
     TextView set_time,set_date;
     Calendar calendar = null;
 
@@ -66,6 +69,8 @@ public class AddTask extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_add_task);
 
         database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        u=user.getUid();
 
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -153,7 +158,7 @@ public class AddTask extends AppCompatActivity implements View.OnClickListener {
         String timestring = set_time.getText().toString();
         String datestring = set_date.getText().toString();
 
-        myRef = database.getInstance().getReference().child("Tasks");
+        myRef = database.getInstance().getReference().child(u).child("Tasks");
 
         DatabaseReference newTask = myRef.push();
         newTask.child("name").setValue(name);

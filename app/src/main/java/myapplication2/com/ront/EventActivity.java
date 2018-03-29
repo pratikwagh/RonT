@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,6 +23,9 @@ import java.util.Date;
 public class EventActivity extends AppCompatActivity {
     private RecyclerView mTaskList;
     private DatabaseReference mDatabase;
+    FirebaseUser user;
+
+    String u;
 
 
     @Override
@@ -34,7 +39,10 @@ public class EventActivity extends AppCompatActivity {
         mTaskList = (RecyclerView) findViewById(R.id.task_list);
         mTaskList.setHasFixedSize(true);
         mTaskList.setLayoutManager(new LinearLayoutManager(this));
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Tasks");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        u=user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child("Tasks");
 
         TextView bannerDay =(TextView)findViewById(R.id.bannerDay);
         TextView bannerDate =(TextView)findViewById(R.id.bannerDate);

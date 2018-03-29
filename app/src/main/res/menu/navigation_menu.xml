@@ -5,9 +5,13 @@
         android:title="Routine"
         android:icon="@drawable/ic_event_black_24dp"/>
 
-    <item android:id="@+id/event"
+    <item android:id="@+id/assign"
         android:title="Assignment"
         android:icon="@drawable/ic_assignment_black_24dp"/>
+
+    <item android:id="@+id/event"
+        android:title="Reminder"
+        android:icon="@drawable/remind"/>
 
     <item android:id="@+id/logout"
         android:title="Logout"

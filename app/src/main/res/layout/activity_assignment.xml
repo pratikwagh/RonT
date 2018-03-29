@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myapplication2.com.ront.AssignmentActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="50dp"
+        android:id="@+id/linearLayout4">
+
+<RelativeLayout
+    android:id="@+id/aname"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_alignParentStart="true"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/assi_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="32dp"
+        android:src="@drawable/assi" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/assi_icon"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/ass_name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Assignment Name"
+            android:textColor="#000"
+            android:textSize="15dp"/>
+
+
+    </LinearLayout>
+</RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/dtime"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/aname"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:onClick="setDate">
+
+            <ImageView
+                android:id="@+id/dtime_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/date" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/dtime_icon"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/set_dtime"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Deadline Date"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:onClick="setDate"/>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/priority"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/dtime"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/prior_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/priority" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/prior_icon"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/set_prior"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Set Priority"
+                    android:inputType="number"
+                    android:textColor="#000"
+                    android:textSize="15dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/Estime"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/priority"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:onClick="setEstime">
+
+            <ImageView
+                android:id="@+id/Est_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/time" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/Est_icon"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/set_Estime"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Set Estimate Time"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:onClick="setEstime"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Add_Assignment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="Add Assignment"
+        android:onClick="addAssignment"/>
+
+
+</RelativeLayout>

@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,6 +24,7 @@ public class RoutineCreate extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    FirebaseUser user;
 
     TimePickerDialog timePickerDialog;
 
@@ -32,7 +35,7 @@ public class RoutineCreate extends AppCompatActivity {
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format;
     Integer value;
-    String j;
+    String j,u;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class RoutineCreate extends AppCompatActivity {
         setContentView(R.layout.activity_routine_create);
 
         database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        u=user.getUid();
 
         tname     = (EditText) findViewById(R.id.set_name);
         set_stime = (TextView) findViewById(R.id.set_stime);
@@ -79,7 +84,7 @@ public class RoutineCreate extends AppCompatActivity {
 
         Log.d("Rohit","open database");
 
-        myRef = database.getInstance().getReference().child(j);
+        myRef = database.getInstance().getReference().child(u).child(j);
 
         DatabaseReference newTask = myRef.push();
         newTask.child("name").setValue(name);

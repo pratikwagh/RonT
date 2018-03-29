@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,7 +24,9 @@ public class Thursday extends Fragment
 
     private RecyclerView mTaskList;
     private DatabaseReference mDatabase;
+    FirebaseUser user;
 
+    String u;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +45,10 @@ public class Thursday extends Fragment
         mTaskList = (RecyclerView) rootView.findViewById(R.id.task_list);
         mTaskList.setHasFixedSize(true);
         mTaskList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Thursday");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        u=user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child("Thursday");
 
         FloatingActionButton fab = rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +109,7 @@ public class Thursday extends Fragment
                     public void onClick(View v) {
                         Intent singleTaskActivity = new Intent(getActivity(),SingleTask.class);
                         singleTaskActivity.putExtra("TaskId",task_key);
+                        singleTaskActivity.putExtra("Weekday","Thursday");
                         startActivity(singleTaskActivity);
 
                     }
