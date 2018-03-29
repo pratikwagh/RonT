@@ -49,7 +49,7 @@ public class AssignmentActivity extends AppCompatActivity {
         Estime = (EditText) findViewById(R.id.set_Estime);
 
     }
-
+/*
     public void setEstime(View view){
         timePickerDialog =new TimePickerDialog(AssignmentActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -81,7 +81,7 @@ public class AssignmentActivity extends AppCompatActivity {
         else {
             format = "AM";
         }
-    }
+    }*/
 
     public void setDate(View view){
         android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentActivity.this, new DatePickerDialog.OnDateSetListener() {

@@ -158,9 +158,10 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:hint="Set Estimate Time"
+                    android:inputType="number"
                     android:textColor="#000"
                     android:textSize="15dp"
-                    android:onClick="setEstime"/>
+                    />
 
 
             </LinearLayout>
