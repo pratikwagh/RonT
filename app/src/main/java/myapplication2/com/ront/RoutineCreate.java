@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +37,10 @@ public class RoutineCreate extends AppCompatActivity {
     String format;
     Integer value;
     String j,u;
+
+    //global variables to store time in firebase
+    //storing time for ease of use
+    public static String bst,bet;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +87,15 @@ public class RoutineCreate extends AppCompatActivity {
         String stime = set_stime.getText().toString();
         String etime = set_etime.getText().toString();
 
-        Log.d("Rohit","open database");
+        if (Integer.parseInt(bst) >= Integer.parseInt(bet))
+        {
+            Toast.makeText(getApplicationContext(), "Start time should be less than End Time",
+                    Toast.LENGTH_LONG).show();
+
+            return;
+        }
+
+        Log.d("RoutineCreatorDebug","open database");
 
         myRef = database.getInstance().getReference().child(u).child(j);
 
@@ -90,7 +103,13 @@ public class RoutineCreate extends AppCompatActivity {
         newTask.child("name").setValue(name);
         newTask.child("date").setValue(stime);
         newTask.child("time").setValue(etime);
-        Log.d("Rohit","push database");
+
+        //extra time field for easy computation
+        newTask.child("start").setValue(bst);
+        newTask.child("end").setValue(bet);
+
+
+        Log.d("RoutineCreatorDebug","push database");
 
         Intent intent = new Intent(RoutineCreate.this,RoutineActivity.class);
         intent.putExtra("value",value);
@@ -108,6 +127,9 @@ public class RoutineCreate extends AppCompatActivity {
                 selectedTimeFormat(hourOfDay,minute);
                 set_stime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
+                //extra time field for easy computation
+                bst= String.valueOf(hourOfDay*100+minute);
+
             }
         }, hour, minute, false);
         timePickerDialog.show();
@@ -123,6 +145,9 @@ public class RoutineCreate extends AppCompatActivity {
                 pmin=minute;
                 selectedTimeFormat(hourOfDay,minute);
                 set_etime.setText(hourOfDay%12 + " : " + minute + " " + format );
+
+                //extra time field for easy computation
+                bet= String.valueOf(hourOfDay*100+minute);
 
             }
         }, hour, minute, false);
