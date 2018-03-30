@@ -1,3 +1,5 @@
+//this activity is for adding assignments
+
 package myapplication2.com.ront;
 
 import android.app.DatePickerDialog;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +35,8 @@ public class AssignmentActivity extends AppCompatActivity {
     String format,u;
     FirebaseUser user;
 
+    TextView DeadTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +51,40 @@ public class AssignmentActivity extends AppCompatActivity {
 
         AssName = (EditText) findViewById(R.id.ass_name);
         DeadDate = (EditText) findViewById(R.id.set_dtime);
+        DeadTime= (TextView) findViewById(R.id.set_etime);
         Prior = (EditText) findViewById(R.id.set_prior);
         Estime = (EditText) findViewById(R.id.set_Estime);
 
     }
-/*
-    public void setEstime(View view){
+
+
+
+//this function is called onclick off  date picker
+    public void setDate(View view){
+        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month =month+1;
+                pday=dayOfMonth;
+                pmonth=month;
+                pyear=year;
+                DeadDate.setText(dayOfMonth+"/"+month+"/"+year);
+            }
+        },year,month,day);
+        datePickerDialog.show();
+
+    }
+
+
+    //this function is called onclick off  time picker
+    public void seteTime(View view){
         timePickerDialog =new TimePickerDialog(AssignmentActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 phr=hourOfDay;
                 pmin=minute;
                 selectedTimeFormat(hourOfDay,minute);
-                Estime.setText(hourOfDay + " : " + minute + " " + format );
+                DeadTime.setText(hourOfDay + " : " + minute + " " + format );
 
             }
         }, hour, minute, false);
@@ -66,6 +92,8 @@ public class AssignmentActivity extends AppCompatActivity {
 
     }
 
+
+    //this function is called in function seteTim to specify time format
     public void selectedTimeFormat(int hour,int min){
 
         if(hour == 0){
@@ -82,41 +110,34 @@ public class AssignmentActivity extends AppCompatActivity {
         else {
             format = "AM";
         }
-    }*/
-
-    public void setDate(View view){
-        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month =month+1;
-                pday=dayOfMonth;
-                pmonth=month;
-                pyear=year;
-                DeadDate.setText(dayOfMonth+"/"+month+"/"+year);
-            }
-        },year,month,day);
-        datePickerDialog.show();
-
     }
 
     public void addAssignment(View view){
 
         String name = AssName.getText().toString();
         String dead_date = DeadDate.getText().toString();
+        String dtime = DeadTime.getText().toString();
         String prior = Prior.getText().toString();
         String estime = Estime.getText().toString();
 
         Log.d("Rohit","open database");
+
+
         /*to reach a particular naode and then add the following data to it.This thing is same in all activity*/
         myRef = database.getInstance().getReference().child(u).child("Assignmnet");
 
+
+        //adding elements to database
         DatabaseReference newTask = myRef.push();
         newTask.child("name").setValue(name);
         newTask.child("dead_date").setValue(dead_date);
+        newTask.child("dead_time").setValue(dtime);
         newTask.child("priority").setValue(prior);
         newTask.child("Estime").setValue(estime);
         Log.d("Rohit","push database");
 
+
+        //going back to home activity
         Intent intent = new Intent(AssignmentActivity.this,HomeActivity.class);
         startActivity(intent);
 

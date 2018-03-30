@@ -89,6 +89,46 @@
             </LinearLayout>
         </RelativeLayout>
 
+
+        <RelativeLayout
+            android:id="@+id/etime"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/stime"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:onClick="seteTime">
+
+            <ImageView
+                android:id="@+id/etime_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="32dp"
+                android:src="@drawable/time" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/etime_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/set_etime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End Time"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:onClick="seteTime"/>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/priority"
             android:layout_width="match_parent"
@@ -167,6 +207,7 @@
             </LinearLayout>
 
         </RelativeLayout>
+
 
 
 

@@ -24,6 +24,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         //this will update the UI with message
         MediaPlayer mediaPlayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
         mediaPlayer.start();
+
+        //using service for vibration
         Vibrator v = (Vibrator)context.getSystemService(context.VIBRATOR_SERVICE);
         v.vibrate(10000);
 
