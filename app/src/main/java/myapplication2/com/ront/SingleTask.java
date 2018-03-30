@@ -1,7 +1,9 @@
 package myapplication2.com.ront;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,7 @@ public class SingleTask extends AppCompatActivity {
     private TextView singleDate;
     private  TextView singleTime;
     private DatabaseReference mDatabase;
+
     FirebaseUser user;
     String u;
 
@@ -56,5 +59,32 @@ public class SingleTask extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    //this function will be executed on click of delete button
+    public void delClicked(View view) {
+
+
+        //getting the passed values
+        task_key = getIntent().getExtras().getString("TaskId");
+        weekday = getIntent().getExtras().getString("Weekday");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        //gtting the user id
+        u=user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(weekday);
+
+
+        //deleting the node for that task from firebase
+        mDatabase.child(task_key).removeValue();
+
+        //going back to home activity
+        Intent intent = new Intent(SingleTask.this,HomeActivity.class);
+        startActivity(intent);
+
+
+        return;
     }
 }

@@ -36,6 +36,20 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="120dp"
             android:text="01:20 AM" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="170dp"
+            android:background="@android:color/holo_red_light"
+            android:fontFamily="sans-serif"
+            android:text="Delete"
+            android:onClick="delClicked"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -105,6 +105,8 @@ public class Monday extends Fragment
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        //calling the intent SingleTask
                         Intent singleTaskActivity = new Intent(getActivity(),SingleTask.class);
                         singleTaskActivity.putExtra("TaskId",task_key);
                         singleTaskActivity.putExtra("Weekday","Monday");

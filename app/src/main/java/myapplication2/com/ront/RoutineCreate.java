@@ -84,6 +84,8 @@ public class RoutineCreate extends AppCompatActivity {
 
         Log.d("Rohit","open database");
 
+
+        //u is the user id , j is the weekday
         myRef = database.getInstance().getReference().child(u).child(j);
 
         DatabaseReference newTask = myRef.push();
