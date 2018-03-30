@@ -38,6 +38,7 @@ public class AssignmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment);
 
+
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         u=user.getUid();
@@ -106,7 +107,7 @@ public class AssignmentActivity extends AppCompatActivity {
         String estime = Estime.getText().toString();
 
         Log.d("Rohit","open database");
-
+        /*to reach a particular naode and then add the following data to it*/
         myRef = database.getInstance().getReference().child(u).child("Assignmnet");
 
         DatabaseReference newTask = myRef.push();
