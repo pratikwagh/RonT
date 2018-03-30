@@ -84,7 +84,7 @@ public class AssignmentActivity extends AppCompatActivity {
                 phr=hourOfDay;
                 pmin=minute;
                 selectedTimeFormat(hourOfDay,minute);
-                DeadTime.setText(hourOfDay + " : " + minute + " " + format );
+                DeadTime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
             }
         }, hour, minute, false);

@@ -84,8 +84,6 @@ public class RoutineCreate extends AppCompatActivity {
 
         Log.d("Rohit","open database");
 
-
-        //u is the user id , j is the weekday
         myRef = database.getInstance().getReference().child(u).child(j);
 
         DatabaseReference newTask = myRef.push();
@@ -108,7 +106,7 @@ public class RoutineCreate extends AppCompatActivity {
                 phr=hourOfDay;
                 pmin=minute;
                 selectedTimeFormat(hourOfDay,minute);
-                set_stime.setText(hourOfDay + " : " + minute + " " + format );
+                set_stime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
             }
         }, hour, minute, false);
@@ -124,7 +122,7 @@ public class RoutineCreate extends AppCompatActivity {
                 phr=hourOfDay;
                 pmin=minute;
                 selectedTimeFormat(hourOfDay,minute);
-                set_etime.setText(hourOfDay + " : " + minute + " " + format );
+                set_etime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
             }
         }, hour, minute, false);
