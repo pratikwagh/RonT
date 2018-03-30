@@ -107,7 +107,7 @@ public class AssignmentActivity extends AppCompatActivity {
         String estime = Estime.getText().toString();
 
         Log.d("Rohit","open database");
-        /*to reach a particular naode and then add the following data to it*/
+        /*to reach a particular naode and then add the following data to it.This thing is same in all activity*/
         myRef = database.getInstance().getReference().child(u).child("Assignmnet");
 
         DatabaseReference newTask = myRef.push();
