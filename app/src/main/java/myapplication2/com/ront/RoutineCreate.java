@@ -133,7 +133,6 @@ public class RoutineCreate extends AppCompatActivity {
                         flag = 1;
                     }
 
-
                     if (bst <= start && bet >= end) {
                         flag = 1;
                     }
