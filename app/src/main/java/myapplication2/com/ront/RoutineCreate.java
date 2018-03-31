@@ -40,7 +40,7 @@ public class RoutineCreate extends AppCompatActivity {
 
     //global variables to store time in firebase
     //storing time for ease of use
-    public static String bst,bet;
+    public static int bst,bet;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,7 @@ public class RoutineCreate extends AppCompatActivity {
         String stime = set_stime.getText().toString();
         String etime = set_etime.getText().toString();
 
-        if (Integer.parseInt(bst) >= Integer.parseInt(bet))
+        if (bst >= bet)
         {
             Toast.makeText(getApplicationContext(), "Start time should be less than End Time",
                     Toast.LENGTH_LONG).show();
@@ -128,7 +128,7 @@ public class RoutineCreate extends AppCompatActivity {
                 set_stime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
                 //extra time field for easy computation
-                bst= String.valueOf(hourOfDay*100+minute);
+                bst= hourOfDay*100+minute;
 
             }
         }, hour, minute, false);
@@ -147,7 +147,7 @@ public class RoutineCreate extends AppCompatActivity {
                 set_etime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
                 //extra time field for easy computation
-                bet= String.valueOf(hourOfDay*100+minute);
+                bet=hourOfDay*100+minute;
 
             }
         }, hour, minute, false);

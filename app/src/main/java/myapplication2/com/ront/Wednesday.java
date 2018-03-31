@@ -92,7 +92,7 @@ public class Wednesday extends Fragment
                 Task.class,
                 R.layout.task_row,
                 TaskViewHolder.class,
-                mDatabase
+                mDatabase.orderByChild("start")
         ) {
             @Override
             protected void populateViewHolder(TaskViewHolder viewHolder, Task model, int position) {

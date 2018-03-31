@@ -92,12 +92,14 @@ public class Monday extends Fragment
                 Task.class,
                 R.layout.task_row,
                 TaskViewHolder.class,
-                mDatabase
+                mDatabase.orderByChild("start")
         ) {
             @Override
             protected void populateViewHolder(TaskViewHolder viewHolder, Task model, int position) {
 
                 final String task_key = getRef(position).getKey().toString();
+
+                //populating the recycler view
                 viewHolder.setName(model.getName());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setTime(model.getTime());
