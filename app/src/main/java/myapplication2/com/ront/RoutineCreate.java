@@ -2,6 +2,7 @@ package myapplication2.com.ront;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +15,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by user on 21/3/18.
@@ -23,8 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RoutineCreate extends AppCompatActivity {
 
+
+    //firebase variables as public
     private FirebaseDatabase database;
-    private DatabaseReference myRef;
+    public static DatabaseReference myRef;
     FirebaseUser user;
 
     TimePickerDialog timePickerDialog;
@@ -41,6 +47,10 @@ public class RoutineCreate extends AppCompatActivity {
     //global variables to store time in firebase
     //storing time for ease of use
     public static int bst,bet;
+
+
+    //flag to test the clash
+    public static int flag;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +92,9 @@ public class RoutineCreate extends AppCompatActivity {
 
     public void addClicked(View view){
 
-        tname     = (EditText) findViewById(R.id.set_name);
-        String name = tname.getText().toString();
-        String stime = set_stime.getText().toString();
-        String etime = set_etime.getText().toString();
+        flag=0;
+
+
 
         if (bst >= bet)
         {
@@ -95,25 +104,92 @@ public class RoutineCreate extends AppCompatActivity {
             return;
         }
 
-        Log.d("RoutineCreatorDebug","open database");
 
-        myRef = database.getInstance().getReference().child(u).child(j);
+        database.getInstance().getReference().child(u).child(j).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        DatabaseReference newTask = myRef.push();
-        newTask.child("name").setValue(name);
-        newTask.child("date").setValue(stime);
-        newTask.child("time").setValue(etime);
+                Log.d("slotClash","2");
 
-        //extra time field for easy computation
-        newTask.child("start").setValue(bst);
-        newTask.child("end").setValue(bet);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    Log.d("slotClash", "3");
 
 
-        Log.d("RoutineCreatorDebug","push database");
+                    int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+                    Log.d("slotClash", "4");
+                    int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
-        Intent intent = new Intent(RoutineCreate.this,RoutineActivity.class);
-        intent.putExtra("value",value);
-        startActivity(intent);
+                    Log.d("slotClash", "" + start + " " + end);
+
+                    if (bst > start && bst < end) {
+
+                        Log.d("slotClash", "5");
+                        flag = 1;
+                    }
+
+                    if (bet > start && bet < end) {
+                        Log.d("slotClash", "6");
+                        flag = 1;
+                    }
+
+                    if (bst == start && bet == end) {
+                        flag = 1;
+                    }
+
+                }
+
+                    if(flag==1)
+                    {
+
+                        Log.d("slotClash","if");
+
+                        Toast.makeText(getApplicationContext(), "This time slot is in use. Please choose an empty time slot.",
+                                Toast.LENGTH_LONG).show();
+
+                        return;
+
+                    }
+                    else {
+
+
+                        tname     = (EditText) findViewById(R.id.set_name);
+                        String name = tname.getText().toString();
+                        String stime = set_stime.getText().toString();
+                        String etime = set_etime.getText().toString();
+
+                        Log.d("RoutineCreatorDebug", "open database");
+
+                        myRef = database.getInstance().getReference().child(u).child(j);
+
+                        DatabaseReference newTask = myRef.push();
+                        newTask.child("name").setValue(name);
+                        newTask.child("date").setValue(stime);
+                        newTask.child("time").setValue(etime);
+
+                        //extra time field for easy computation
+                        newTask.child("start").setValue(bst);
+                        newTask.child("end").setValue(bet);
+
+
+                        Log.d("RoutineCreatorDebug", "push database");
+
+                        Intent intent = new Intent(RoutineCreate.this, RoutineActivity.class);
+                        intent.putExtra("value", value);
+                        startActivity(intent);
+
+                    }
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
 
 
     }
@@ -128,7 +204,7 @@ public class RoutineCreate extends AppCompatActivity {
                 set_stime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
                 //extra time field for easy computation
-                bst= hourOfDay*100+minute;
+                bst= (hourOfDay*100)+minute;
 
             }
         }, hour, minute, false);
@@ -147,7 +223,7 @@ public class RoutineCreate extends AppCompatActivity {
                 set_etime.setText(hourOfDay%12 + " : " + minute + " " + format );
 
                 //extra time field for easy computation
-                bet=hourOfDay*100+minute;
+                bet=(hourOfDay*100)+minute;
 
             }
         }, hour, minute, false);
@@ -173,4 +249,8 @@ public class RoutineCreate extends AppCompatActivity {
             format = "AM";
         }
     }
+
+
+
+
 }
