@@ -31,6 +31,7 @@
     <string name="EmailID">Email-ID</string>
     <string name="login">login</string>
     <string name="email_address">Email Address</string>
+    <string name="title_activity_assignment_view">AssignmentView</string>
 
 
 </resources>

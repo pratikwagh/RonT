@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class AssignmentActivity extends AppCompatActivity {
+public class AssignmentAdderActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -41,7 +41,7 @@ public class AssignmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assignment);
+        setContentView(R.layout.activity_assignment_adder);
 
 
         database = FirebaseDatabase.getInstance();
@@ -61,7 +61,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
 //this function is called onclick off  date picker
     public void setDate(View view){
-        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentAdderActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month =month+1;
@@ -78,7 +78,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
     //this function is called onclick off  time picker
     public void seteTime(View view){
-        timePickerDialog =new TimePickerDialog(AssignmentActivity.this, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog =new TimePickerDialog(AssignmentAdderActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 phr=hourOfDay;
@@ -138,7 +138,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
 
         //going back to home activity
-        Intent intent = new Intent(AssignmentActivity.this,HomeActivity.class);
+        Intent intent = new Intent(AssignmentAdderActivity.this,HomeActivity.class);
         startActivity(intent);
 
 
