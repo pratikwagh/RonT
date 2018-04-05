@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
 
                             case R.id.planner:
-                                Intent e = new Intent(HomeActivity.this, AssignmentAdderActivity.class);
+                                Intent e = new Intent(HomeActivity.this, OnTimePlanner.class);
                                 startActivity(e);
                                 break;
 
