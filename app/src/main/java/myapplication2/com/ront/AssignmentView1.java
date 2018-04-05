@@ -48,7 +48,7 @@ public class AssignmentView1 extends AppCompatActivity {
         //firebas authentication and makin database referanc
         user = FirebaseAuth.getInstance().getCurrentUser();
         u=user.getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child("Assignmnt");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child("Assignment");
 
         Log.d("assx","2");
 
@@ -97,7 +97,7 @@ public class AssignmentView1 extends AppCompatActivity {
         super.onStart();
         FirebaseRecyclerAdapter<Task,AssignmentView1.TaskViewHolder> FBRA = new FirebaseRecyclerAdapter<Task, AssignmentView1.TaskViewHolder>(
                 Task.class,
-                R.layout.task_row,
+                R.layout.assign_row,
                 AssignmentView1.TaskViewHolder.class,
                 mDatabase.orderByChild("name")
         ) {
@@ -119,12 +119,12 @@ public class AssignmentView1 extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        /*//calling the intent SingleTask
-                        Intent singleTaskActivity = new Intent(AssignmentView1.this,SingleTask.class);
+                        //calling the intent SingleTask
+                        Intent singleTaskActivity = new Intent(AssignmentView1.this,SingleAssignment.class);
                         singleTaskActivity.putExtra("TaskId",task_key);
-                        singleTaskActivity.putExtra("Weekday","Monday");
+                        //singleTaskActivity.putExtra("Weekday","Monday");
                         startActivity(singleTaskActivity);
-*/
+
                     }
                 });
 

@@ -16,10 +16,10 @@
         />
 
     <TextView
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Satrt Time :"
+        android:text="Deadline Date :"
         android:textSize="15dp"
         android:id="@+id/startTime"
         android:layout_below="@id/taskName"
@@ -37,11 +37,11 @@
 
     <TextView
         android:id="@+id/endTime"
-        android:layout_width="80dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/startTime"
         android:layout_below="@+id/startTime"
-        android:text="End Time :"
+        android:text="Deadline Time :"
         android:textSize="15dp" />
 
     <TextView
@@ -53,5 +53,7 @@
         android:layout_below="@+id/taskDate"
         android:text=" 12:08 PM"
         android:textSize="15dp" />
+
+
 
 </RelativeLayout>

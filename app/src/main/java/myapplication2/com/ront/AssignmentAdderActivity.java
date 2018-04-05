@@ -124,14 +124,14 @@ public class AssignmentAdderActivity extends AppCompatActivity {
 
 
         /*to reach a particular naode and then add the following data to it.This thing is same in all activity*/
-        myRef = database.getInstance().getReference().child(u).child("Assignmnet");
+        myRef = database.getInstance().getReference().child(u).child("Assignment");
 
 
         //adding elements to database
         DatabaseReference newTask = myRef.push();
         newTask.child("name").setValue(name);
-        newTask.child("dead_date").setValue(dead_date);
-        newTask.child("dead_time").setValue(dtime);
+        newTask.child("date").setValue(dead_date);
+        newTask.child("time").setValue(dtime);
         newTask.child("priority").setValue(prior);
         newTask.child("Estime").setValue(estime);
         Log.d("Rohit","push database");

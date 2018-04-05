@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="myapplication2.com.ront.SingleAssignment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/singletask"
+                android:text="Watch Anime"
+                android:textColor="#000"
+                android:textSize="30dp"
+                android:layout_margin="20dp"
+                />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/singledate"
+                android:layout_alignBottom="@+id/singledate"
+                android:layout_alignStart="@+id/singletask"
+                android:text="Deadline Date :" />
+
+            <TextView
+                android:id="@+id/singledate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/singletask"
+                android:layout_marginStart="18dp"
+                android:layout_toEndOf="@+id/date"
+                android:text="16 February" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/date"
+                android:layout_below="@+id/date"
+                android:layout_marginTop="20dp"
+                android:text="Deadline Time :" />
+
+            <TextView
+                android:id="@+id/singletime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/time"
+                android:layout_alignBottom="@+id/time"
+                android:layout_centerHorizontal="true"
+                android:text="01:20 AM" />
+
+            <TextView
+                android:id="@+id/prior"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/time"
+                android:layout_below="@+id/time"
+                android:layout_marginTop="14dp"
+                android:text="Priority :" />
+
+            <TextView
+                android:id="@+id/singleprior"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/prior"
+                android:layout_alignBottom="@+id/prior"
+                android:layout_alignStart="@+id/singletime"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/estime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/prior"
+                android:layout_below="@+id/prior"
+                android:layout_marginTop="19dp"
+                android:text="Estimate Time :" />
+
+            <TextView
+                android:id="@+id/singleEstime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/estime"
+                android:layout_alignBottom="@+id/estime"
+                android:layout_alignStart="@+id/singleprior"
+                android:text="4" />
+
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/prior"
+                android:layout_marginBottom="14dp"
+                android:background="@android:color/holo_red_light"
+                android:fontFamily="sans-serif"
+                android:onClick="delClicked"
+                android:text="Delete"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
