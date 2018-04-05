@@ -52,7 +52,10 @@
             android:name=".AssignmentView1"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".SingleAssignment" />
-        <activity android:name=".OnTimePlanner"
+        <activity
+            android:name=".OnTimePlanner"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".onPlannerDate"
             android:parentActivityName=".HomeActivity"></activity>
     </application>
 
