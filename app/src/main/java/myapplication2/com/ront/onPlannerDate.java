@@ -19,12 +19,16 @@ public class onPlannerDate extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //getting clicked day from clicked date
         String date = getIntent().getExtras().getString("Date");
+        String dayName = getIntent().getExtras().getString("DayName");
+
+        int day= getIntent().getExtras().getInt("Day");
 
         tv=(TextView)findViewById(R.id.plDate);
 
 
-        tv.setText(date);
+        tv.setText(date+" "+dayName);
 
     }
 }
