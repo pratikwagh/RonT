@@ -103,18 +103,13 @@ public class onPlannerDate extends AppCompatActivity {
                 viewHolder.setDate(model.getDate());
                 viewHolder.setTime(model.getTime());
 
-                /*viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                String startTime=model.getDate();
+                String endTime=model.getTime();
 
-                        //calling the intent SingleTask
-                        Intent singleTaskActivity = new Intent(getActivity(),SingleTask.class);
-                        singleTaskActivity.putExtra("TaskId",task_key);
-                        singleTaskActivity.putExtra("Weekday","Monday");
-                        startActivity(singleTaskActivity);
+                Log.d("onxx st",startTime);
+                Log.d("onxx et",endTime);
 
-                    }
-                });*/
+
 
             }
         };

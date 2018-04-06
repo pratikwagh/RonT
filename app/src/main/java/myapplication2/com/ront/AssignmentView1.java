@@ -99,7 +99,7 @@ public class AssignmentView1 extends AppCompatActivity {
                 Task.class,
                 R.layout.assign_row,
                 AssignmentView1.TaskViewHolder.class,
-                mDatabase.orderByChild("name")
+                mDatabase.orderByChild("Timestamp")
         ) {
 
 
