@@ -1,9 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="myapplication2.com.ront.UpdateRoutine">
 
-</android.support.constraint.ConstraintLayout>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context="myapplication2.com.ront.UpdateRoutine">
+
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:popupTheme="@style/PopupOverlay"
+    >
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+
+        android:dividerPadding="8dp"
+        android:orientation="horizontal"
+        android:showDividers="end">
+
+        <Button
+            android:id="@+id/Back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_close_black_24dp"/>
+
+        <TextView
+            android:id="@+id/toolbar_save"
+            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="70dp"
+            android:text="New Assignment"
+            android:textAllCaps="true"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_check_black_24dp"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@id/toolbar"
+    android:paddingTop="50dp">
+
+    <RelativeLayout
+        android:id="@+id/rname"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentStart="true"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/assi_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="32dp"
+            android:src="@drawable/assi" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/assi_icon"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/set_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Task Name"
+                android:textColor="#000"
+                android:textSize="15dp"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/stime"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_below="@id/rname"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:onClick="setsTime">
+
+        <ImageView
+            android:id="@+id/stime_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="32dp"
+            android:src="@drawable/time" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/stime_icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/set_stime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Time"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:onClick="setsTime"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/etime"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_below="@id/stime"
+        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:onClick="seteTime">
+
+        <ImageView
+            android:id="@+id/etime_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="32dp"
+            android:src="@drawable/time" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/etime_icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/set_etime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Time"
+                android:textColor="#000"
+                android:textSize="15dp"
+                android:onClick="seteTime"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+
+</RelativeLayout>

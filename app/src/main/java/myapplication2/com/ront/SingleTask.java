@@ -21,6 +21,7 @@ public class SingleTask extends AppCompatActivity {
     private TextView singleDate;
     private  TextView singleTime;
     private DatabaseReference mDatabase;
+    Integer value;
 
     FirebaseUser user;
     String u;
@@ -32,6 +33,7 @@ public class SingleTask extends AppCompatActivity {
 
         task_key = getIntent().getExtras().getString("TaskId");
         weekday = getIntent().getExtras().getString("Weekday");
+        value = getIntent().getIntExtra("value", -1);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         u=user.getUid();
@@ -80,11 +82,31 @@ public class SingleTask extends AppCompatActivity {
         //deleting the node for that task from firebase
         mDatabase.child(task_key).removeValue();
 
-        //going back to home activity
-        Intent intent = new Intent(SingleTask.this,HomeActivity.class);
-        startActivity(intent);
+        //going back to particular weekday RoutineFragment activity
+        Intent i = new Intent(SingleTask.this,RoutineActivity.class);
+        i.putExtra("value",value);
+        startActivity(i);
 
 
         return;
+    }
+
+//for updating the particular task
+    public void edit(View view){
+
+        Intent intent = new Intent(SingleTask.this,UpdateRoutine.class);
+        intent.putExtra("TaskId",task_key);
+        intent.putExtra("Weekday",weekday);
+        intent.putExtra("value",value);
+        startActivity(intent);
+
+    }
+
+//for navigating back
+    public void back (View view){
+
+        Intent i = new Intent(SingleTask.this,RoutineActivity.class);
+        i.putExtra("value",value);
+        startActivity(i);
     }
 }
