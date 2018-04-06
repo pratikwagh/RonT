@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,8 @@ public class onPlannerDate extends AppCompatActivity {
     FirebaseUser user;
     private FirebaseDatabase database;
 
+
+    //list to store time slots of routines of day
     List<String> Mondays=new ArrayList<String>();
     List<String> Tuesdays=new ArrayList<String>();
     List<String> Wednesdays=new ArrayList<String>();
@@ -49,6 +53,10 @@ public class onPlannerDate extends AppCompatActivity {
     List<String> Fridaye=new ArrayList<String>();
     List<String> Saturdaye=new ArrayList<String>();
     List<String> Sundaye=new ArrayList<String>();
+
+
+    //json to store assignments information
+    JSONObject json = new JSONObject();
 
     String u;
 
