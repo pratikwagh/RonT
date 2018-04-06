@@ -50,7 +50,6 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:onClick="addClicked"
                 android:background="@drawable/ic_check_black_24dp"/>
 
         </LinearLayout>

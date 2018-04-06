@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,11 +36,13 @@ public class RoutineCreate extends AppCompatActivity {
     public static DatabaseReference myRef;
     FirebaseUser user;
 
+    private AwesomeValidation awesomeValidation;
+
     TimePickerDialog timePickerDialog;
 
     TextView set_stime,set_etime;
     EditText tname;
-    Button back;
+    Button back,confirm;
 
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format;
@@ -57,6 +62,8 @@ public class RoutineCreate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine_create);
 
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         u=user.getUid();
@@ -68,6 +75,12 @@ public class RoutineCreate extends AppCompatActivity {
         final Intent intent = new Intent(getIntent());
         Bundle extras = intent.getExtras();
 
+        //Awesome validation
+
+        awesomeValidation.addValidation(this, R.id.set_name, ".{1,}", R.string.tnameerror);
+       // awesomeValidation.addValidation(this, R.id.set_stime, ".{6,}", R.string.passworderror);
+      //  awesomeValidation.addValidation(this, R.id.set_etime, ".{6,}", R.string.passworderror);
+
 
         value = intent.getIntExtra("value", -1);
 
@@ -77,6 +90,8 @@ public class RoutineCreate extends AppCompatActivity {
         }
 
         back= (Button) findViewById(R.id.Back);
+        confirm= (Button) findViewById(R.id.add);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +102,20 @@ public class RoutineCreate extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (awesomeValidation.validate())
+                {
+                    addClicked(view);
+                }
+            }
+        });
+
+
 
     }
 
@@ -178,9 +207,10 @@ public class RoutineCreate extends AppCompatActivity {
 
                         Log.d("RoutineCreatorDebug", "push database");
 
-                        Intent intent = new Intent(RoutineCreate.this, RoutineActivity.class);
-                        intent.putExtra("value", value);
-                        startActivity(intent);
+
+                            Intent intent = new Intent(RoutineCreate.this, RoutineActivity.class);
+                            intent.putExtra("value", value);
+                            startActivity(intent);
 
                     }
 

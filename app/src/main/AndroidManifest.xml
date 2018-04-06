@@ -55,8 +55,10 @@
         <activity
             android:name=".OnTimePlanner"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".onPlannerDate"
-            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".onPlannerDate"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".UpdateRoutine"></activity>
     </application>
 
 </manifest>
