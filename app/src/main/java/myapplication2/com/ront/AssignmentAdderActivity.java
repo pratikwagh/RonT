@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.math.BigInteger;
+
 public class AssignmentAdderActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
@@ -134,7 +136,43 @@ public class AssignmentAdderActivity extends AppCompatActivity {
         newTask.child("time").setValue(dtime);
         newTask.child("priority").setValue(prior);
         newTask.child("Estime").setValue(estime);
-        Log.d("Rohit","push database");
+
+        //creating a timeestamp of the assignment
+
+
+        //appending 0 if less than 10
+        String m0="",d0="",h0="",mi0="";
+        if (pmonth<10)
+            m0="0";
+
+        if (pday<10)
+            d0="0";
+
+        if (phr<10)
+            h0="0";
+
+        if (pmin<10)
+            mi0="0";
+
+
+
+        String timestamp;
+        timestamp=""+pyear+m0+pmonth+d0+pday+h0+phr+mi0+pmin;
+
+        Log.d("tss","yr"+pyear);
+        Log.d("tss","mn"+pmonth);
+        Log.d("tss","dy"+pday);
+        Log.d("tss","hr"+phr);
+        Log.d("tss","mn"+pmin);
+        Log.d("tss","ts"+timestamp);
+
+
+        //pusing timestamp too the database
+        newTask.child("Timestamp").setValue(timestamp);
+
+
+
+        Log.d("AssAddr","after pushing");
 
 
         //going back to home activity
