@@ -95,4 +95,7 @@ public class SingleAssignment extends AppCompatActivity {
 
         return;
     }
+    public void edit(View view){
+
+    }
 }

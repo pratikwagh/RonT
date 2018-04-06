@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="myapplication2.com.ront.SingleTask">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/PopupOverlay">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:dividerPadding="8dp"
+            android:orientation="horizontal"
+            android:showDividers="end">
+
+            <Button
+                android:id="@+id/Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/back"
+                android:onClick="back"/>
+
+            <TextView
+                android:id="@+id/toolbar_save"
+                style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="40dp"
+                android:paddingRight="70dp"
+                android:text="BeOnTime"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -21,27 +67,46 @@
             />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:id="@+id/singledate"
-            android:text="16 February"
-            android:layout_marginTop="80dp"
+            android:id="@+id/date"
+            android:text="Start Time :"
+            android:layout_below="@id/singletask"
             android:layout_marginLeft="30dp"
-            />
+            android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/singledate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="16 February"
+                android:layout_below="@id/singletask"
+                android:layout_toRightOf="@id/date"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                />
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/time"
+                android:text="End Time :"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/date" />
         <TextView
             android:id="@+id/singletime"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="120dp"
-            android:text="01:20 AM" />
+            android:text="01:20 AM"
+            android:layout_toRightOf="@id/time"/>
 
         <Button
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="170dp"
             android:background="@android:color/holo_red_light"
             android:fontFamily="sans-serif"
@@ -50,9 +115,27 @@
             android:textSize="18sp"
             android:textStyle="bold"
             />
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="170dp"
+                android:background="#32CD32"
+                android:fontFamily="sans-serif"
+                android:text="Edit"
+                android:onClick="edit"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/delete"
+                />
+
+
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
+</RelativeLayout>
 
 
 

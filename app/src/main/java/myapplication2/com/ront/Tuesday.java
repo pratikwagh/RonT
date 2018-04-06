@@ -108,6 +108,7 @@ public class Tuesday extends Fragment
                         Intent singleTaskActivity = new Intent(getActivity(),SingleTask.class);
                         singleTaskActivity.putExtra("TaskId",task_key);
                         singleTaskActivity.putExtra("Weekday","Tuesday");
+                        singleTaskActivity.putExtra("value", 1);
                         startActivity(singleTaskActivity);
 
                     }
