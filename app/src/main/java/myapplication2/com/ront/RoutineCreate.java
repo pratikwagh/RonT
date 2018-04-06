@@ -119,6 +119,8 @@ public class RoutineCreate extends AppCompatActivity {
 
     }
 
+
+    //when add button is clickd
     public void addClicked(View view){
 
         flag=0;

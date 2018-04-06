@@ -9,13 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class onPlannerDate extends AppCompatActivity {
 
@@ -23,6 +31,24 @@ public class onPlannerDate extends AppCompatActivity {
     private RecyclerView mTaskList;
     private DatabaseReference mDatabase;
     FirebaseUser user;
+    private FirebaseDatabase database;
+
+    List<String> Mondays=new ArrayList<String>();
+    List<String> Tuesdays=new ArrayList<String>();
+    List<String> Wednesdays=new ArrayList<String>();
+    List<String> Thursdays=new ArrayList<String>();
+    List<String> Fridays=new ArrayList<String>();
+    List<String> Saturdays=new ArrayList<String>();
+    List<String> Sundays=new ArrayList<String>();
+
+
+    List<String> Mondaye=new ArrayList<String>();
+    List<String> Tuesdaye=new ArrayList<String>();
+    List<String> Wednesdaye=new ArrayList<String>();
+    List<String> Thursdaye=new ArrayList<String>();
+    List<String> Fridaye=new ArrayList<String>();
+    List<String> Saturdaye=new ArrayList<String>();
+    List<String> Sundaye=new ArrayList<String>();
 
     String u;
 
@@ -55,12 +81,203 @@ public class onPlannerDate extends AppCompatActivity {
         mTaskList.setLayoutManager(new LinearLayoutManager(onPlannerDate.this));
 
 
-        //firebas authentication and makin database referance
+        //firebase authentication and makin database referance
         user = FirebaseAuth.getInstance().getCurrentUser();
         u = user.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(dayName);
 
+        database = FirebaseDatabase.getInstance();
 
+
+        //working on scheduling here
+        String[] Days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+
+        for (final String arrDay: Days) {
+
+
+            database.getInstance().getReference().child(u).child(arrDay).orderByChild("start").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    //snapshot will contain days node
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Log.d("loopr", "inside first for loop");
+
+                        Log.d("loopr", "Key 1 " + snapshot.getKey());
+
+
+                        //storing start and end time of each day into a list
+                        if(arrDay.equals("Monday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Mondays.add(""+start);
+                            Mondaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Tuesday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Tuesdays.add(""+start);
+                            Tuesdaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Wednesday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Wednesdays.add(""+start);
+                            Wednesdaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Thursday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Thursdays.add(""+start);
+                            Thursdaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Friday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Fridays.add(""+start);
+                            Fridaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Saturday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Saturdays.add(""+start);
+                            Saturdaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+
+                        }
+
+                        if(arrDay.equals("Sunday"))
+                        {
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            //converting to minutes
+                            start=((start/100)*60)+(start%100);
+                            end=((end/100)*60)+(end%100);
+
+                            Log.d("loopr", "" + start);
+                            Log.d("loopr", "" + end);
+
+                            Sundays.add(""+start);
+                            Sundaye.add(""+end);
+
+                            /*int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));*/
+
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+
+        }
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
