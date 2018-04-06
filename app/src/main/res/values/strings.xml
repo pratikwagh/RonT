@@ -32,6 +32,7 @@
     <string name="login">login</string>
     <string name="email_address">Email Address</string>
     <string name="title_activity_assignment_view">AssignmentView</string>
+    <string name="tnameerror">Enter Valid Task Name</string>
 
 
 </resources>

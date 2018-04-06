@@ -56,6 +56,7 @@ public class Wednesday extends Fragment
 
                 Intent a = new Intent(getActivity(), RoutineCreate.class);
                 a.putExtra("Weekday", "Wednesday");
+                a.putExtra("value", 2);
                 startActivity(a);
 
             }
