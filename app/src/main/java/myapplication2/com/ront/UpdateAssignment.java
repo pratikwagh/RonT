@@ -1,5 +1,3 @@
-//this activity is for adding assignments
-
 package myapplication2.com.ront;
 
 import android.app.DatePickerDialog;
@@ -17,34 +15,36 @@ import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.math.BigInteger;
 
-public class AssignmentAdderActivity extends AppCompatActivity {
+public class UpdateAssignment extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private DatabaseReference mDatabase;
     private FirebaseAuth auth;
 
     TimePickerDialog timePickerDialog;
     android.app.DatePickerDialog DatePickerDialog;
 
-    EditText AssName,DeadDate,Prior,Estime;
+    EditText AssName,DeadDate,Prior,Estime,DeadTime;
     Button back;
     int hour,minute,day,month,year,phr,pmin,pday,pmonth,pyear;
     String format,u;
     FirebaseUser user;
 
-    TextView DeadTime;
-
+    String task_key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assignment_adder);
-
+        setContentView(R.layout.activity_update_assignment);
 
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -53,17 +53,40 @@ public class AssignmentAdderActivity extends AppCompatActivity {
 
         AssName = (EditText) findViewById(R.id.ass_name);
         DeadDate = (EditText) findViewById(R.id.set_dtime);
-        DeadTime= (TextView) findViewById(R.id.set_etime);
+        DeadTime= (EditText) findViewById(R.id.set_etime);
         Prior = (EditText) findViewById(R.id.set_prior);
         Estime = (EditText) findViewById(R.id.set_Estime);
 
+
+        task_key = getIntent().getExtras().getString("TaskId");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child("Assignment");
+        mDatabase.child(task_key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String task_title = (String) dataSnapshot.child("name").getValue();
+                String task_date = (String) dataSnapshot.child("date").getValue();
+                String task_time = (String) dataSnapshot.child("time").getValue();
+                String priority = (String) dataSnapshot.child("priority").getValue();
+                String est_time = (String) dataSnapshot.child("Estime").getValue();
+
+                AssName.setText(task_title);
+                DeadDate.setText(task_date);
+                DeadTime.setText(task_time);
+                Prior.setText(priority);
+                Estime.setText(est_time);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
-
-
-//this function is called onclick off  date picker
+    //this function is called onclick off  date picker
     public void setDate(View view){
-        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(AssignmentAdderActivity.this, new DatePickerDialog.OnDateSetListener() {
+        android.app.DatePickerDialog datePickerDialog =  new DatePickerDialog(UpdateAssignment.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month =month+1;
@@ -77,10 +100,9 @@ public class AssignmentAdderActivity extends AppCompatActivity {
 
     }
 
-
     //this function is called onclick off  time picker
     public void seteTime(View view){
-        timePickerDialog =new TimePickerDialog(AssignmentAdderActivity.this, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog =new TimePickerDialog(UpdateAssignment.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 phr=hourOfDay;
@@ -126,18 +148,18 @@ public class AssignmentAdderActivity extends AppCompatActivity {
 
 
         /*to reach a particular naode and then add the following data to it.This thing is same in all activity*/
-        myRef = database.getInstance().getReference().child(u).child("Assignment");
+        myRef = database.getInstance().getReference().child(u).child("Assignment").child(task_key);
 
 
         //adding elements to database
-        DatabaseReference newTask = myRef.push();
-        newTask.child("name").setValue(name);
-        newTask.child("date").setValue(dead_date);
-        newTask.child("time").setValue(dtime);
-        newTask.child("priority").setValue(prior);
-        newTask.child("Estime").setValue(estime);
+       // DatabaseReference newTask = myRef.push();
+        myRef.child("name").setValue(name);
+        myRef.child("date").setValue(dead_date);
+        myRef.child("time").setValue(dtime);
+        myRef.child("priority").setValue(prior);
+        myRef.child("Estime").setValue(estime);
 
-        //creating a timeestamp of the assignment
+        //creating a timestamp of the assignment
 
 
         //appending 0 if less than 10
@@ -168,24 +190,28 @@ public class AssignmentAdderActivity extends AppCompatActivity {
 
 
         //pusing timestamp too the database
-        newTask.child("Timestamp").setValue(timestamp);
+        myRef.child("Timestamp").setValue(timestamp);
 
 
 
         Log.d("AssAddr","after pushing");
 
 
-        //going back to Assignmnetview1 activity
-        Intent intent = new Intent(AssignmentAdderActivity.this,AssignmentView1.class);
+        //going back to SingleAssignment activity
+        Intent intent = new Intent(UpdateAssignment.this,SingleAssignment.class);
+        intent.putExtra("TaskId",task_key);
         startActivity(intent);
 
 
     }
 
+    //for navigating back
     public void back (View view){
 
-        Intent intent = new Intent(AssignmentAdderActivity.this,AssignmentView1.class);
+        Intent intent = new Intent(UpdateAssignment.this,SingleAssignment.class);
+        intent.putExtra("TaskId",task_key);
         startActivity(intent);
 
     }
+
 }

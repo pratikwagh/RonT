@@ -9,55 +9,62 @@ xmlns:tools="http://schemas.android.com/tools"
 tools:context="myapplication2.com.ront.UpdateRoutine">
 
 
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
-    app:layout_scrollFlags="scroll|enterAlways"
-    app:popupTheme="@style/PopupOverlay"
-    >
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/PopupOverlay">
 
-        android:dividerPadding="8dp"
-        android:orientation="horizontal"
-        android:showDividers="end">
 
-        <Button
-            android:id="@+id/Back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_close_black_24dp"/>
-
-        <TextView
-            android:id="@+id/toolbar_save"
-            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="70dp"
-            android:text="New Assignment"
-            android:textAllCaps="true"
-            android:textSize="20sp" />
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/ic_check_black_24dp"/>
+            <Button
+                android:id="@+id/Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:background="@drawable/ic_close_black_24dp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/toolbar_save"
+                style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="?attr/selectableItemBackground"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="70dp"
+                android:text="Routine"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textSize="20sp" />
 
-</android.support.v7.widget.Toolbar>
+
+
+            <Button
+                android:id="@+id/add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/toolbar_save"
+                android:layout_alignBottom="@+id/toolbar_save"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_check_black_24dp" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
 
 <LinearLayout
     android:layout_width="match_parent"

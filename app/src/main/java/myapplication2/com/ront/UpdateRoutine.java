@@ -45,6 +45,7 @@ public class UpdateRoutine extends AppCompatActivity {
     String format;
     Integer value;
     String j, u, taskid;
+    String olds,olde,nme,start,end;
 
 
     //global variables to store time in firebase
@@ -77,7 +78,7 @@ public class UpdateRoutine extends AppCompatActivity {
         //Awesome validation
 
         awesomeValidation.addValidation(this, R.id.set_name, ".{1,}", R.string.tnameerror);
-        // awesomeValidation.addValidation(this, R.id.set_stime, ".{6,}", R.string.passworderror);
+        //awesomeValidation.addValidation(this, R.id.set_stime, "(1[01]|[0-9]):([0-5][0-9]|[0-9])(AM|PM) ",R.string.time);
         //  awesomeValidation.addValidation(this, R.id.set_etime, ".{6,}", R.string.passworderror);
 
 
@@ -88,24 +89,31 @@ public class UpdateRoutine extends AppCompatActivity {
             taskid = (String) extras.get("TaskId");
         }
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(j);
+    /*    mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(j);
         mDatabase.child(taskid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String task_title = (String) dataSnapshot.child("name").getValue();
                 String task_date = (String) dataSnapshot.child("date").getValue();
                 String task_time = (String) dataSnapshot.child("time").getValue();
+                String start1= String.valueOf(dataSnapshot.child("start").getValue());
+                String end1= String.valueOf(dataSnapshot.child("end").getValue());
 
                 tname.setText(task_title);
                 set_stime.setText(task_date);
                 set_etime.setText(task_time);
+                bst = Integer.parseInt(start1);
+                bet = Integer.parseInt(end1);
+                Log.d("checkpoint","value: " +bst);
+                Log.d("checkpoint","value: "+bet);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
         back = (Button) findViewById(R.id.Back);
@@ -140,14 +148,22 @@ public class UpdateRoutine extends AppCompatActivity {
 
     public void addClicked(View view){
 
-        flag=0;
+        nme = tname.getText().toString();
+        start = set_stime.getText().toString();
+        end = set_etime.getText().toString();
 
+
+        delete();
+
+        flag=0;
+        Log.d("checkpoint","1");
 
 
         if (bst >= bet)
         {
             Toast.makeText(getApplicationContext(), "Start time should be less than End Time",
                     Toast.LENGTH_LONG).show();
+            Log.d("checkpoint","2");
 
             return;
         }
@@ -188,7 +204,7 @@ public class UpdateRoutine extends AppCompatActivity {
                     }
 
 
-
+                    Log.d("checkpoint","3");
                 }
 
                 if(flag==1)
@@ -198,12 +214,13 @@ public class UpdateRoutine extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), "This time slot is in use. Please choose an empty time slot.",
                             Toast.LENGTH_LONG).show();
+                    Log.d("checkpoint","4");
 
                     return;
 
                 }
                 else {
-
+                    Log.d("checkpoint","5");
 
                     //tname     = (EditText) findViewById(R.id.set_name);
                     String name = tname.getText().toString();
@@ -212,25 +229,28 @@ public class UpdateRoutine extends AppCompatActivity {
 
                     Log.d("RoutineCreatorDebug", "open database");
 
-                    myRef = database.getInstance().getReference().child(u).child(j).child(taskid);
+                    myRef = database.getInstance().getReference().child(u).child(j);
+                    Log.d("blank",nme);
+                    Log.d("blank",start);
+                    Log.d("blank",end);
 
-                   // DatabaseReference newTask = myRef.push();
-                    myRef.child("name").setValue(name);
-                    myRef.child("date").setValue(stime);
-                    myRef.child("time").setValue(etime);
+                    DatabaseReference newTask = myRef.push();
+                    newTask.child("name").setValue(nme);
+                    newTask.child("date").setValue(start);
+                    newTask.child("time").setValue(end);
 
                     //extra time field for easy computation
-                    myRef.child("start").setValue(bst);
-                    myRef.child("end").setValue(bet);
+                    newTask.child("start").setValue(bst);
+                    newTask.child("end").setValue(bet);
 
 
                     Log.d("RoutineCreatorDebug", "push database");
 
 
-                    Intent intent = new Intent(UpdateRoutine.this, SingleTask.class);
+                    Intent intent = new Intent(UpdateRoutine.this, RoutineActivity.class);
                     intent.putExtra("value", value);
-                    intent.putExtra("TaskId",taskid);
-                    intent.putExtra("Weekday",j);
+                   // intent.putExtra("TaskId",taskid);
+                    //intent.putExtra("Weekday",j);
                     startActivity(intent);
 
                 }
@@ -248,6 +268,27 @@ public class UpdateRoutine extends AppCompatActivity {
 
 
     }
+
+    public void delete() {
+
+
+        //getting the passed values
+        //task_key = getIntent().getExtras().getString("TaskId");
+       // weekday = getIntent().getExtras().getString("Weekday");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        //gtting the user id
+        u=user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(j);
+
+
+        //deleting the node for that task from firebase
+        mDatabase.child(taskid).removeValue();
+
+        return;
+    }
+
 
     public void setsTime(View view){
         timePickerDialog =new TimePickerDialog(UpdateRoutine.this, new TimePickerDialog.OnTimeSetListener() {

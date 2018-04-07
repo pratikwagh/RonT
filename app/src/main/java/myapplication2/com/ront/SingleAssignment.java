@@ -95,7 +95,20 @@ public class SingleAssignment extends AppCompatActivity {
 
         return;
     }
+    //for updating the particular task
     public void edit(View view){
+
+        Intent intent = new Intent(SingleAssignment.this,UpdateAssignment.class);
+        intent.putExtra("TaskId",task_key);
+        startActivity(intent);
+
+    }
+
+    //for navigating back
+    public void back (View view){
+
+        Intent intent = new Intent(SingleAssignment.this,AssignmentView1.class);
+        startActivity(intent);
 
     }
 }
