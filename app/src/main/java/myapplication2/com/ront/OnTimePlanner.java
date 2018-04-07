@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CalendarView;
 
 import java.util.Calendar;
@@ -67,6 +68,8 @@ public class OnTimePlanner extends AppCompatActivity {
 
 
                 Intent intent=new Intent();
+
+                Log.d("msg", "reached");
 
                 intent.setClass(OnTimePlanner.this,onPlannerDate.class);
                 intent.putExtra("Date",date);

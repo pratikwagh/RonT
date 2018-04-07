@@ -55,11 +55,8 @@
         <activity
             android:name=".OnTimePlanner"
             android:parentActivityName=".HomeActivity" />
-        <activity
-            android:name=".onPlannerDate"
-            android:parentActivityName=".HomeActivity" />
-        <activity android:name=".UpdateRoutine" />
-        <activity android:name=".UpdateAssignment"></activity>
+        <activity android:name=".onPlannerDate"
+            android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>
