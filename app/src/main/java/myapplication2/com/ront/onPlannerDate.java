@@ -22,9 +22,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class onPlannerDate extends AppCompatActivity {
@@ -37,26 +39,28 @@ public class onPlannerDate extends AppCompatActivity {
 
 
     //list to store time slots of routines of day
-    List<String> Mondays=new ArrayList<String>();
-    List<String> Tuesdays=new ArrayList<String>();
-    List<String> Wednesdays=new ArrayList<String>();
-    List<String> Thursdays=new ArrayList<String>();
-    List<String> Fridays=new ArrayList<String>();
-    List<String> Saturdays=new ArrayList<String>();
-    List<String> Sundays=new ArrayList<String>();
+    List<Integer> Mondays=new ArrayList<Integer>();
+    List<Integer> Tuesdays=new ArrayList<Integer>();
+    List<Integer> Wednesdays=new ArrayList<Integer>();
+    List<Integer> Thursdays=new ArrayList<Integer>();
+    List<Integer> Fridays=new ArrayList<Integer>();
+    List<Integer> Saturdays=new ArrayList<Integer>();
+    List<Integer> Sundays=new ArrayList<Integer>();
 
 
-    List<String> Mondaye=new ArrayList<String>();
-    List<String> Tuesdaye=new ArrayList<String>();
-    List<String> Wednesdaye=new ArrayList<String>();
-    List<String> Thursdaye=new ArrayList<String>();
-    List<String> Fridaye=new ArrayList<String>();
-    List<String> Saturdaye=new ArrayList<String>();
-    List<String> Sundaye=new ArrayList<String>();
+    List<Integer> Mondaye=new ArrayList<Integer>();
+    List<Integer> Tuesdaye=new ArrayList<Integer>();
+    List<Integer> Wednesdaye=new ArrayList<Integer>();
+    List<Integer> Thursdaye=new ArrayList<Integer>();
+    List<Integer> Fridaye=new ArrayList<Integer>();
+    List<Integer> Saturdaye=new ArrayList<Integer>();
+    List<Integer> Sundaye=new ArrayList<Integer>();
 
 
     //json to store assignments information
     JSONObject json = new JSONObject();
+    JSONArray array = new JSONArray();
+    JSONObject item = new JSONObject();
 
     String u;
 
@@ -130,11 +134,13 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Mondays.add(""+start);
-                            Mondaye.add(""+end);
+                            Mondays.add(start);
+                            Mondaye.add(end);
 
-                            /*int i=0;
-                            Log.d("loopr","List"+Mondays.get(i++));*/
+                            int i=0;
+                            Log.d("loopr","List"+Mondays.get(i++));
+
+                            Log.d("loopr",""+Mondays.size());
 
 
                         }
@@ -153,8 +159,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Tuesdays.add(""+start);
-                            Tuesdaye.add(""+end);
+                            Tuesdays.add(start);
+                            Tuesdaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -176,8 +182,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Wednesdays.add(""+start);
-                            Wednesdaye.add(""+end);
+                            Wednesdays.add(start);
+                            Wednesdaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -199,8 +205,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Thursdays.add(""+start);
-                            Thursdaye.add(""+end);
+                            Thursdays.add(start);
+                            Thursdaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -222,8 +228,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Fridays.add(""+start);
-                            Fridaye.add(""+end);
+                            Fridays.add(start);
+                            Fridaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -245,8 +251,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Saturdays.add(""+start);
-                            Saturdaye.add(""+end);
+                            Saturdays.add(start);
+                            Saturdaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -268,8 +274,8 @@ public class onPlannerDate extends AppCompatActivity {
                             Log.d("loopr", "" + start);
                             Log.d("loopr", "" + end);
 
-                            Sundays.add(""+start);
-                            Sundaye.add(""+end);
+                            Sundays.add(start);
+                            Sundaye.add(end);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -286,7 +292,135 @@ public class onPlannerDate extends AppCompatActivity {
             });
 
         }
+
+
+
+
+        //creating json file from
+        database.getInstance().getReference().child(u).child("Assignment").orderByChild("priority").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            //we want to reverse the prirority , can be done using extra attribut storing negative of prirority
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+
+                    int esti = Integer.parseInt(snapshot.child("Estime").getValue().toString());
+                    String ts = snapshot.child("Timestamp").getValue().toString();
+                    String name = snapshot.child("name").getValue().toString();
+
+                    int monx=Integer.parseInt(ts.substring(6,7));
+                    int yrx=Integer.parseInt(ts.substring(0,3));
+                    int datex=Integer.parseInt(ts.substring(4,5));
+
+                    int hrx=Integer.parseInt(ts.substring(8,9));
+                    int minx=Integer.parseInt(ts.substring(10,11));
+
+                    //calculating total minutes
+                    int timex=(hrx*60)+minx;
+
+
+                    //calling function to get name of day
+                    String dnx=getDayName(monx,datex,yrx);
+
+                    List<Integer> temps=new ArrayList<Integer>();
+                    List<Integer> tempe=new ArrayList<Integer>();
+
+                    if (dnx.equals("Monday"))
+                    {
+                        int index=0;
+                        for (int i:Mondays)
+                        {
+                            if (timex<=0)
+                            {
+                                break;
+                            }
+
+                            if (timex>minx && timex<Mondays.get(index+1)){
+                                if (Mondays.get(index+1)-Mondaye.get(index)!=0)
+                                {
+                                    /*if (timex<Mondays.get(index+1)-Mondaye.get(index))
+                                    {
+                                        tempe.add(Mondays.get(index+1));
+
+                                    }*/
+
+                                        temps.add(Mondaye.get(index));
+                                        tempe.add(Mondays.get(index+1));
+
+                                        timex=timex-(Mondays.get(index+1)-Mondaye.get(index));
+
+
+                                }
+
+                            }
+
+
+                            index++;
+
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
+    String getDayName(int monx,int datex,int yrx)
+    {
+
+        //grtting day of week
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(monx, datex, yrx);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        String dayNamex="";
+
+        switch (dayOfWeek){
+            case Calendar.SUNDAY:
+                dayNamex="Sunday";
+
+                break;
+            case Calendar.MONDAY:
+                dayNamex="Monday";
+
+                break;
+            case Calendar.TUESDAY:
+                dayNamex="Tuesday";
+
+                break;
+            case Calendar.WEDNESDAY:
+                dayNamex="Wednesday";
+
+                break;
+            case Calendar.THURSDAY:
+                dayNamex="Thursday";
+
+                break;
+            case Calendar.FRIDAY:
+                dayNamex="Friday";
+
+                break;
+            case Calendar.SATURDAY:
+                dayNamex="Saturday";
+
+                break;
+        }
+
+        return dayNamex;
+
+
+    }
+
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
         View mView;
