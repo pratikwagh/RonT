@@ -120,6 +120,7 @@ public class AssignmentAdderActivity extends AppCompatActivity {
         String dead_date = DeadDate.getText().toString();
         String dtime = DeadTime.getText().toString();
         String prior = Prior.getText().toString();
+        Integer nprior = Integer.valueOf(prior);
         String estime = Estime.getText().toString();
 
         Log.d("Rohit","open database");
@@ -135,6 +136,7 @@ public class AssignmentAdderActivity extends AppCompatActivity {
         newTask.child("date").setValue(dead_date);
         newTask.child("time").setValue(dtime);
         newTask.child("priority").setValue(prior);
+        newTask.child("npriority").setValue(-nprior);
         newTask.child("Estime").setValue(estime);
 
         //creating a timeestamp of the assignment

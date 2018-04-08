@@ -206,6 +206,10 @@ public class RoutineCreate extends AppCompatActivity {
                         newTask.child("start").setValue(bst);
                         newTask.child("end").setValue(bet);
 
+                        //extra field for getting last routine first for scheduling
+                        newTask.child("nend").setValue(1000000-bet);
+
+
 
                         Log.d("RoutineCreatorDebug", "push database");
 
