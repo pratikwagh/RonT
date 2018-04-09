@@ -70,6 +70,8 @@ public class onPlannerDate extends AppCompatActivity {
     List<String> Saturdayna=new ArrayList<String>();
     List<String> Sundayna=new ArrayList<String>();
 
+
+    //for storing free slots
     List<String> Mondaytt=new ArrayList<String>();
     List<String> Tuesdaytt=new ArrayList<String>();
     List<String> Wednesdaytt=new ArrayList<String>();

@@ -54,11 +54,35 @@
         android:text="Free Time Today:"
         android:textColor="#FFF" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/background"
+        android:layout_marginTop="210dp">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Routine" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Assignment" />
+    </RadioGroup>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/planner_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="280dp"
         android:visibility="visible">
 
     </android.support.v7.widget.RecyclerView>
