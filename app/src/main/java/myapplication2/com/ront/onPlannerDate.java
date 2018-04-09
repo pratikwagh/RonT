@@ -33,6 +33,7 @@ import java.util.Stack;
 public class onPlannerDate extends AppCompatActivity {
 
     TextView tv;
+    TextView tt;
     private RecyclerView mTaskList;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -61,6 +62,22 @@ public class onPlannerDate extends AppCompatActivity {
     List<Integer> Saturdaye=new ArrayList<Integer>();
     List<Integer> Sundaye=new ArrayList<Integer>();
 
+    List<String> Mondayna=new ArrayList<String>();
+    List<String> Tuesdayna=new ArrayList<String>();
+    List<String> Wednesdayna=new ArrayList<String>();
+    List<String> Thursdayna=new ArrayList<String>();
+    List<String> Fridayna=new ArrayList<String>();
+    List<String> Saturdayna=new ArrayList<String>();
+    List<String> Sundayna=new ArrayList<String>();
+
+    List<String> Mondaytt=new ArrayList<String>();
+    List<String> Tuesdaytt=new ArrayList<String>();
+    List<String> Wednesdaytt=new ArrayList<String>();
+    List<String> Thursdaytt=new ArrayList<String>();
+    List<String> Fridaytt=new ArrayList<String>();
+    List<String> Saturdaytt=new ArrayList<String>();
+    List<String> Sundaytt=new ArrayList<String>();
+
 
     //json to store assignments information
     JSONObject json = new JSONObject();
@@ -68,6 +85,13 @@ public class onPlannerDate extends AppCompatActivity {
     JSONObject item = new JSONObject();
 
     String u;
+
+
+    //for storing total time
+    public int totalTime=0;
+
+    //store the result of scheduling
+    StringBuilder result = new StringBuilder();
 
     Integer esti;
 
@@ -83,11 +107,14 @@ public class onPlannerDate extends AppCompatActivity {
 
         //getting clicked day from clicked date
         String date = getIntent().getExtras().getString("Date");
-        String dayName = getIntent().getExtras().getString("DayName");
+        final String dayName = getIntent().getExtras().getString("DayName");
 
         int day = getIntent().getExtras().getInt("Day");
 
+
+        //setting text views
         tv = (TextView) findViewById(R.id.plDate);
+        tt= (TextView) findViewById(R.id.ttime);
 
 
         tv.setText(date + " " + dayName);
@@ -98,6 +125,13 @@ public class onPlannerDate extends AppCompatActivity {
         mTaskList = (RecyclerView) findViewById(R.id.planner_list);
         mTaskList.setHasFixedSize(true);
         mTaskList.setLayoutManager(new LinearLayoutManager(onPlannerDate.this));
+
+
+        //testing
+       // TaskViewHolder taskViewHolder=new TaskViewHolder();
+        //taskViewHolder.setName("testing");
+
+
 
 
 
@@ -137,6 +171,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -147,11 +183,14 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Mondays.add(start);
                             Mondaye.add(end);
+                            Mondayna.add(rname);
 
                             int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));
 
                             Log.d("loopr",""+Mondays.size());
+
+                            Log.d("loopr",rname);
 
 
                         }
@@ -163,6 +202,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -172,6 +213,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Tuesdays.add(start);
                             Tuesdaye.add(end);
+                            Tuesdayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -186,6 +228,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -195,6 +239,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Wednesdays.add(start);
                             Wednesdaye.add(end);
+                            Wednesdayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -209,6 +254,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -218,6 +265,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Thursdays.add(start);
                             Thursdaye.add(end);
+                            Thursdayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -232,6 +280,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -241,6 +291,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Fridays.add(start);
                             Fridaye.add(end);
+                            Fridayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -255,6 +306,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -264,6 +317,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Saturdays.add(start);
                             Saturdaye.add(end);
+                            Saturdayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -278,6 +332,8 @@ public class onPlannerDate extends AppCompatActivity {
 
                             int end = Integer.parseInt(snapshot.child("end").getValue().toString());
 
+                            String rname=snapshot.child("name").getValue().toString();
+
                             //converting to minutes
                             start=((start/100)*60)+(start%100);
                             end=((end/100)*60)+(end%100);
@@ -287,6 +343,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                             Sundays.add(start);
                             Sundaye.add(end);
+                            Sundayna.add(rname);
 
                             /*int i=0;
                             Log.d("loopr","List"+Mondays.get(i++));*/
@@ -294,6 +351,112 @@ public class onPlannerDate extends AppCompatActivity {
                         }
 
                     }
+
+                    //calculating total time
+                    Log.d("plln",dayName);
+
+                    if (dayName.equals("Monday"))
+                    {
+                        Log.d("plln","Insie if");
+                        Log.d("plln","size:"+Mondaye.size());
+                        int index=0;
+                        totalTime=0;
+                        for (int i=0;i<Mondaye.size();i++)
+                        {
+                            int x=Mondaye.get(index)-Mondays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+
+                            Log.d("plln","x:"+x);
+                            Log.d("plln","i"+i);
+                        }
+
+                    }
+
+                    if (dayName.equals("Tuesday"))
+                    {
+                        Log.d("plln","Inside if tues");
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Tuesdaye)
+                        {
+                            int x=Tuesdaye.get(index)-Tuesdays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+                    if (dayName.equals("Wednesday"))
+                    {
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Wednesdaye)
+                        {
+                            int x=Wednesdaye.get(index)-Wednesdays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+                    if (dayName.equals("Thursday"))
+                    {
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Thursdaye)
+                        {
+                            int x=Thursdaye.get(index)-Thursdays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+                    if (dayName.equals("Friday"))
+                    {
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Fridaye)
+                        {
+                            int x=Fridaye.get(index)-Fridays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+                    if (dayName.equals("Saturday"))
+                    {
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Saturdaye)
+                        {
+                            int x=Saturdaye.get(index)-Saturdays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+                    if (dayName.equals("Sunday"))
+                    {
+                        int index=0;
+                        totalTime=0;
+                        for (int i:Sundaye)
+                        {
+                            int x=Sundaye.get(index)-Sundays.get(index);
+                            totalTime=totalTime+x;
+                            index++;
+                        }
+
+                    }
+
+
+
+                    //setting totAL Time on text view
+                    tt.setText("Today You have "+(totalTime/60)+":"+(totalTime%60)+" hours of free time.");
+                    Log.d("plln","total time:"+totalTime);
 
                 }
 
@@ -308,6 +471,10 @@ public class onPlannerDate extends AppCompatActivity {
         Log.d("loopr","List1");
 
 
+
+
+
+
         //creating json file from
         database.getInstance().getReference().child(u).child("Assignment").orderByChild("npriority").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -315,537 +482,149 @@ public class onPlannerDate extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    Log.d("tester","inside assognmet data change");
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Log.d("tester", "inside assognmet data change");
 
                     esti = Integer.parseInt(snapshot.child("Estime").getValue().toString());
                     String ts = snapshot.child("Timestamp").getValue().toString();
-                    final String name = snapshot.child("name").getValue().toString();
-                    Log.d("tester","check point 1");
-                    int datex=Integer.parseInt(ts.substring(6,7));
-                    int yrx=Integer.parseInt(ts.substring(0,3));
-                    int monx=Integer.parseInt(ts.substring(4,5));
-                    Log.d("tester","check point 2");
-                    int hrx=Integer.parseInt(ts.substring(8,9));
-                    Log.d("tester","check point 3");
-                    int minx=Integer.parseInt(ts.substring(10,11));
+                    String name = snapshot.child("name").getValue().toString();
+
+                    int datex = Integer.parseInt(ts.substring(6, 7));
+                    int yrx = Integer.parseInt(ts.substring(0, 3));
+                    int monx = Integer.parseInt(ts.substring(4, 5));
+
+                    int hrx = Integer.parseInt(ts.substring(8, 9));
+                    int minx = Integer.parseInt(ts.substring(10, 11));
 
                     //calculating total minutes
-                    final int timex=(hrx*60)+minx;
-                    Log.d("tester","check point 4");
+                    int timex = (hrx * 60) + minx;
+
 
                     //calling function to get name of day
-                    String dnx=getDayName(monx,datex,yrx);
-
-                    List<Integer> temps=new ArrayList<Integer>();
-                    List<Integer> tempe=new ArrayList<Integer>();
+                    String dnx = getDayName(monx, datex, yrx);
 
 
-                    Log.d("loopr","List2");
+
+                    List<Integer> temps = new ArrayList<Integer>();
+                    List<Integer> tempe = new ArrayList<Integer>();
+
+
+                    Log.d("loopr", "List2");
 
 
                     database1 = FirebaseDatabase.getInstance();
+/*
 
-                    while(esti > 0)
+                    switch (dnx)
                     {
-                        Log.d("tester","inside while:"+esti);
-
-                        if(dnx.equals("Monday"))
-                        {
-
-                            Log.d("loopr","Monday");
-                            Log.d("tester","inside Monday");
-                            final Stack<String> monday = new Stack<String>();
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Monday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-
-                                //
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Log.d("tester","inside modat data change");
-                                    Log.d("loopr","Monday");
-
-                                    Integer flag=0;
-                                    int Size = Mondays.size() - 1;
-                                    Log.d("Monday","1");
-
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Mondaye.get(Size) >= timex)
-                                        {
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Mondays.get(Size) + ","+  Mondaye.get(Size);
-
-                                            monday.push(routine);
-                                            Log.d("Monday","2");
-                                        }
-                                        else
-                                        {
-                                            Log.d("Monday","3");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Mondaye.get(Size) - Mondays.get(Size+1) );
-
-                                                remaining= ( Mondaye.get(Size) - Mondays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Mondaye.get(Size));
-                                                remaining=(timex - Mondaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            monday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-
-
-                                    //Call recycler view
-
-                                    mAdapter = new MyAdapter(monday);
-                                    mTaskList.setAdapter(mAdapter);
-                                    mAdapter.notifyDataSetChanged();
-
-
-                                }
-
-
-
-
-
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Monday","cancel");
-
-                                }
-                            });
-
-
-
-                            dnx="Sunday";
-                        }
-                        else if(dnx.equals("Sunday"))
-                        {
-                            Log.d("loopr","Sunday");
-                            final Stack<String> sunday = new Stack<String>();
-
-
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Sunday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Sundaye.size() - 1;
-
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Sundaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Tuesday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Sundays.get(Size) + ","+  Sundaye.get(Size);
-
-                                            sunday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Monday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Sundaye.get(Size) - Sundays.get(Size+1) );
-
-                                                remaining= ( Sundaye.get(Size) - Sundays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Sundaye.get(Size));
-                                                remaining=(timex - Sundaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            sunday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Tuesday","3");
-                                }
-                            });
-
-                            dnx="Saturday";
-                        }
-                        else if(dnx.equals("Saturday"))
-                        {
-                            Log.d("loopr","Saturday");
-                            final Stack<String> saturday = new Stack<String>();
-
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Saturday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Saturdaye.size() - 1;
-
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Saturdaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Saturday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Saturdays.get(Size) + ","+  Saturdaye.get(Size);
-
-                                            saturday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Saturday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Saturdaye.get(Size) - Saturdays.get(Size+1) );
-
-                                                remaining= ( Saturdaye.get(Size) - Saturdays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Saturdaye.get(Size));
-                                                remaining=(timex - Saturdaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            saturday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Saturday","3");
-                                }
-                            });
-
-
-                            dnx="Friday";
-                        }
-                        else if(dnx.equals("Friday"))
-                        {
-                            Log.d("loopr","Friday");
-                            final Stack<String> friday = new Stack<String>();
-
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Friday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Fridaye.size() - 1;
-
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Fridaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Friday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Fridays.get(Size) + ","+  Fridaye.get(Size);
-
-                                            friday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Friday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Fridaye.get(Size) - Fridays.get(Size+1) );
-
-                                                remaining= ( Fridaye.get(Size) - Fridays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Fridaye.get(Size));
-                                                remaining=(timex - Fridaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            friday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Friday","3");
-                                }
-                            });
-
-                            dnx="Thursday";
-                        }
-                        else if(dnx.equals("Thursday"))
-                        {
-                            Log.d("loopr","Thursday");
-                            final Stack<String> thursday = new Stack<String>();
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Thursday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Thursdaye.size() - 1;
-
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Thursdaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Thursday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Thursdays.get(Size) + ","+  Thursdaye.get(Size);
-
-                                            thursday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Thursday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Thursdaye.get(Size) - Thursdays.get(Size+1) );
-
-                                                remaining= ( Thursdaye.get(Size) - Thursdays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Thursdaye.get(Size));
-                                                remaining=(timex - Thursdaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            thursday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Thursday","3");
-                                }
-                            });
-
-                            dnx="Wednesday";
-                        }
-                        else if(dnx.equals("Wednesday"))
-                        {
-                            Log.d("loopr","Wednesday");
-                            final Stack<String> wednesday = new Stack<String>();
-                            Log.d("tester","check point 5");
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Wednesday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Wednesdaye.size() - 1;
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Log.d("tester","check point 6");
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Wednesdaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Wednseday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Wednesdays.get(Size) + ","+  Wednesdaye.get(Size);
-
-                                            wednesday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Wednesday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Wednesdaye.get(Size) - Wednesdays.get(Size+1) );
-
-                                                remaining= ( Wednesdaye.get(Size) - Wednesdays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Wednesdaye.get(Size));
-                                                remaining=(timex - Wednesdaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            wednesday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Wednesday","3");
-                                }
-                            });
-                            Log.d("tester","I am here");
-                            dnx="Tuesday";
-                            Log.d("tester","value of dnx"+dnx);
-                        }
-                        else if(dnx.equals("Tuesday"))
-                        {
-                            Log.d("loopr","Tuesday");
-                            final Stack<String> tuesday = new Stack<String>();
-
-                            FirebaseDatabase.getInstance().getReference().child(u).child("Tuesday").orderByChild("nend").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                                Integer Size = Tuesdaye.size() - 1;
-
-
-                                @Override
-
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                    Integer flag=0;
-
-                                    //snapshot will contain days node
-                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                        if(Tuesdaye.get(Size) >= timex)
-                                        {
-                                            Log.d("Tuesday","1");
-                                            String routine=snapshot.child("name").getValue().toString() +","+ Tuesdays.get(Size) + ","+  Tuesdaye.get(Size);
-
-                                            tuesday.push(routine);
-                                        }
-                                        else
-                                        {
-                                            Log.d("Tuesday","2");
-                                            Integer remaining;
-                                            if(flag == 1)
-                                            {
-                                                esti = esti - ( Tuesdaye.get(Size) - Tuesdays.get(Size+1) );
-
-                                                remaining= ( Tuesdaye.get(Size) - Tuesdays.get(Size+1) );
-                                            }
-                                            else {
-                                                esti = esti - (timex - Tuesdaye.get(Size));
-                                                remaining=(timex - Tuesdaye.get(Size));
-                                            }
-                                            flag=1;
-                                            String assignmentname = name + ",a," + remaining;
-                                            tuesday.push(assignmentname);
-                                        }
-
-                                        Size=Size-1;
-
-                                        if(Size<0)
-                                            break;
-
-                                    }
-                                }
-
-
-
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    Log.d("Tuesday","3");
-                                }
-                            });
-
-                            dnx="Monday";
-                        }
-
-
-
+                        case "Monday":
+                            mondaySh(esti,name,timex);
 
                     }
+*/
+
+
 
                 }
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
+
+
+  /* void mondaySh(int esti,String name,int timex)
+   {
+       int index=0;
+        int i;
+
+        //flag for getting first free slot
+        int flag=0;
+
+           for (i=Mondaye.size()-1; i>=0;i--)
+           {
+               //getting from end of the list
+               int et=Mondaye.get(i);
+               int st=Mondays.get(i);
+
+
+               if (flag==0) {
+                   if (et < timex && i == Mondaye.size() - 1) {
+
+
+                       result.append(name + "," + et + "," + timex);
+                       flag = 1;
+                       esti=esti-(timex-et);
+
+                   } else if (et < timex && i != Mondaye.size() - 1 && Mondaye.get(i + 1) > timex) {
+
+                       result.append(name + "," + et + "," + timex);
+                       flag = 1;
+                       esti=esti-(timex-et);
+
+                   } else if (et < timex && i != Mondaye.size() - 1 && Mondaye.get(i + 1) <= timex) {
+
+                       result.append(name + "," + et + "," + Mondays.get(i + 1));
+                       flag = 1;
+                       esti=esti-(Mondays.get(i + 1)-et);
+
+                   }
+                   else if(Mondays.get(i-1)>timex)
+                   {
+                       result.append(name + "," + "0" + "," + timex);
+                       esti=esti-timex;
+                   }
+
+
+               }
+               else {
+                   if(timex<Mondays.get(i-1) && timex<et && et!=Mondays.get(i-1))
+                       result.append(name+","+","+et+","+Mondays.get(i-1));
+
+               }
+
+
+               result.append(Mondayna.get(i)+","+Mondays.get(i)+","+Mondaye.get(i));
+
+           }
+
+           Log.d("loopee",result.toString());
+   }
+
+    void tuesdaySh()
+    {
+
+    }
+
+    void wednesdaySh()
+    {
+
+    }
+
+    void thursdaySh()
+    {
+
+    }
+
+
+    void fridaySh()
+    {
+
+    }
+
+
+    void saturdaySh()
+    {
+
+    }
+
+    void sundaySh()
+    {
+
+    }
+*/
+
 
     String getDayName(int monx,int datex,int yrx)
     {
@@ -894,7 +673,6 @@ public class onPlannerDate extends AppCompatActivity {
     }
 
 
-
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
         View mView;
         public TaskViewHolder(View itemView){
@@ -932,6 +710,7 @@ public class onPlannerDate extends AppCompatActivity {
 
                 //populating the recycler view
                 viewHolder.setName(model.getName());
+                //viewHolder.setName("lol");
                 viewHolder.setDate(model.getDate());
                 viewHolder.setTime(model.getTime());
 
