@@ -18,8 +18,11 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     FirebaseUser user;
     String u,dayOfTheWeek ;
+    String[] curr_timestamp = new String[1];
 
 
     private DrawerLayout Drawer;
@@ -179,6 +183,9 @@ return super.onOptionsItemSelected(item);
                 Log.d("assx","4");
 
                 final String task_key = getRef(position).getKey().toString();
+                String[] ass_timestamp = new String[1];
+
+               ass_timestamp = check(task_key);
 
                 //populating the recycler view
                 viewHolder.setName(model.getName());
@@ -201,5 +208,23 @@ return super.onOptionsItemSelected(item);
             }
         };
         mTaskList.setAdapter(FBRA);
+    }
+
+    public String[] check(String task_key){
+        final String[] ass_timestamp = new String[1];
+        mDatabase.child(task_key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                 ass_timestamp[0] = (String)dataSnapshot.child("Timestamp").getValue();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return ass_timestamp;
     }
 }
