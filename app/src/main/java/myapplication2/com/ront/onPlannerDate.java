@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class onPlannerDate extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mDatabase2;
     FirebaseUser user;
     private FirebaseDatabase database,database1;
     private FirebaseDatabase mDatabase1;
@@ -108,7 +109,7 @@ public class onPlannerDate extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //getting clicked day from clicked date
-        String date = getIntent().getExtras().getString("Date");
+        final String date = getIntent().getExtras().getString("Date");
         final String dayName = getIntent().getExtras().getString("DayName");
 
         int day = getIntent().getExtras().getInt("Day");
@@ -129,23 +130,117 @@ public class onPlannerDate extends AppCompatActivity {
         mTaskList.setLayoutManager(new LinearLayoutManager(onPlannerDate.this));
 
 
+        //firebase authentication and makin database referance
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        u = user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(dayName);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child(u).child("Assignment");
+
+        database = FirebaseDatabase.getInstance();
+        mDatabase1 = FirebaseDatabase.getInstance();
+
+
         //testing
        // TaskViewHolder taskViewHolder=new TaskViewHolder();
         //taskViewHolder.setName("testing");
 
 
+        //configuring radio button
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rgp);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+
+                View radioButton = radioGroup.findViewById(checkedId);
+                int index = radioGroup.indexOfChild(radioButton);
+
+                // Add logic here
+
+                switch (index) {
+                    case 0: // first button
+
+                        FirebaseRecyclerAdapter<Task,Monday.TaskViewHolder> FBRA = new FirebaseRecyclerAdapter<Task, Monday.TaskViewHolder>(
+                                Task.class,
+                                R.layout.task_row,
+                                Monday.TaskViewHolder.class,
+                                mDatabase.orderByChild("start")
+                        ) {
+                            @Override
+                            protected void populateViewHolder(Monday.TaskViewHolder viewHolder, Task model, int position) {
+
+                                final String task_key = getRef(position).getKey().toString();
+
+                                //populating the recycler view
+                                viewHolder.setName(model.getName());
+                                //viewHolder.setName("lol");
+                                viewHolder.setDate(model.getDate());
+                                viewHolder.setTime(model.getTime());
+
+                                String startTime=model.getDate();
+                                String endTime=model.getTime();
+
+                                Log.d("onxx st",startTime);
+                                Log.d("onxx et",endTime);
+
+
+
+                            }
+                        };
+                        mTaskList.setAdapter(FBRA);
+
+                        Toast.makeText(getApplicationContext(), "Today's Routine ", Toast.LENGTH_LONG).show();
+
+
+                        //end of case 0
+
+                break;
+                    case 1: // secondbutton
+
+                        FirebaseRecyclerAdapter<Task,AssignmentView1.TaskViewHolder> FBRA2 = new FirebaseRecyclerAdapter<Task, AssignmentView1.TaskViewHolder>(
+                                Task.class,
+                                R.layout.assign_row,
+                                AssignmentView1.TaskViewHolder.class,
+                                mDatabase2.orderByChild("date").equalTo(date)
+                        ) {
+
+
+                            @Override
+                            protected void populateViewHolder(AssignmentView1.TaskViewHolder viewHolder, Task model, int position) {
+
+
+                                final String task_key = getRef(position).getKey().toString();
+
+                                if ((model.getDate()).equals(date)) {
+
+                                    //populating the recycler view
+                                    viewHolder.setName(model.getName());
+                                    viewHolder.setDate(model.getDate());
+                                    viewHolder.setTime(model.getTime());
+
+                                }
 
 
 
 
 
-        //firebase authentication and makin database referance
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        u = user.getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(u).child(dayName);
+                            }
+                        };
+                        mTaskList.setAdapter(FBRA2);
 
-        database = FirebaseDatabase.getInstance();
-        mDatabase1 = FirebaseDatabase.getInstance();
+                        Toast.makeText(getApplicationContext(), "Today's Assignments ", Toast.LENGTH_LONG).show();
+                        break;
+                }
+            }
+        });
+
+
+
+
+
+
+
 
 
         //working on scheduling here

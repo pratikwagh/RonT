@@ -27,7 +27,7 @@ public class OnTimePlanner extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
 
                 //making date format
-                String date = i2+"-"+(i1+1)+"-"+i;
+                String date = i2+"/"+(i1+1)+"/"+i;
                 String dayName="error";
 
                 //grtting day of week
