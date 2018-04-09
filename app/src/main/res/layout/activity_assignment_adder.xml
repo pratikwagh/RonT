@@ -218,8 +218,7 @@
             android:layout_height="72dp"
             android:layout_below="@id/priority"
             android:layout_alignParentStart="true"
-            android:clickable="true"
-            android:onClick="setEstime">
+            android:clickable="true">
 
             <ImageView
                 android:id="@+id/Est_icon"

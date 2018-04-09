@@ -29,8 +29,9 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:background="@drawable/i1" />
+                android:layout_height="200dp"
+                android:background="@drawable/i1"
+                android:id="@+id/imageView" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,26 +52,52 @@
                 android:layout_marginLeft="10dp"
                 android:layout_below="@id/bannerDay"
                 android:id="@+id/bannerDate"/>
+
+            <TextView
+                android:id="@+id/plDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignStart="@+id/bannerDate"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="17dp"
+                android:layout_marginStart="95dp"
+                android:background="@drawable/bg_tv"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:text="Today's Schedule"
+                android:textColor="#FFF" />
+
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/plDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bg_tv"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            android:text="Today's Schedule"
-            android:textColor="#FFF" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/task_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="130dp"
+            android:visibility="visible">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/upDate"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_tv"
+            android:paddingBottom="10dp"
+
+            android:paddingTop="10dp"
+            android:text="Upcoming Assignment"
+            android:textColor="#FFF"
+            android:textAlignment="center"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ass_list"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
             android:visibility="visible">
 
         </android.support.v7.widget.RecyclerView>
