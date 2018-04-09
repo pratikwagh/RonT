@@ -48,6 +48,8 @@
             android:exported="true" />
 
         <activity android:name=".AssignmentAdderActivity" />
+        <activity android:name=".UpdateAssignment" />
+        <activity android:name=".UpdateRoutine" />
         <activity
             android:name=".AssignmentView1"
             android:parentActivityName=".HomeActivity" />
@@ -55,8 +57,9 @@
         <activity
             android:name=".OnTimePlanner"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".onPlannerDate"
-            android:parentActivityName=".HomeActivity"></activity>
+        <activity
+            android:name=".onPlannerDate"
+            android:parentActivityName=".HomeActivity" />
     </application>
 
 </manifest>

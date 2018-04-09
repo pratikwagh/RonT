@@ -27,6 +27,7 @@ public class Thursday extends Fragment
     FirebaseUser user;
 
     String u;
+    String l[];
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

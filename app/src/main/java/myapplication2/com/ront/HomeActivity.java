@@ -9,6 +9,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by user on 15/3/18.
@@ -30,6 +34,22 @@ public class HomeActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+
+        TextView bannerDay =(TextView)findViewById(R.id.bannerDay);
+        TextView bannerDate =(TextView)findViewById(R.id.bannerDate);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        bannerDay.setText(dayOfTheWeek);
+
+        long date =System.currentTimeMillis();
+        SimpleDateFormat sdff = new SimpleDateFormat("dd MMMM yyyy");
+        String dateString = sdff.format(date);
+        bannerDate.setText(dateString);
+
+
 
 
         Drawer=(DrawerLayout) findViewById(R.id.drawerlayout);

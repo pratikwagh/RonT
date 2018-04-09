@@ -7,10 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerlayout">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <android.support.v7.widget.Toolbar
@@ -19,10 +20,64 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/relLay">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/i1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monday"
+                android:textColor="#FFFFFF"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/bannerDay"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 February"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/bannerDay"
+                android:id="@+id/bannerDate"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/plDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_tv"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:text="Today's Schedule"
+            android:textColor="#FFF" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/task_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+        </android.support.v7.widget.RecyclerView>
 
 
 
-    </FrameLayout>
+    </LinearLayout>
 
 
     <android.support.design.widget.NavigationView
@@ -35,5 +90,7 @@
         app:headerLayout="@layout/nav_header">
 
 </android.support.design.widget.NavigationView>
+
+
 
 </android.support.v4.widget.DrawerLayout>

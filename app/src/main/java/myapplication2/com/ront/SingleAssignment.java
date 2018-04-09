@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ public class SingleAssignment extends AppCompatActivity {
 
     FirebaseUser user;
     String u;
+    Button edit;
 
 
 
@@ -45,6 +47,18 @@ public class SingleAssignment extends AppCompatActivity {
         singleDate = (TextView)findViewById(R.id.singledate);
         singlePriority = (TextView)findViewById(R.id.singleprior);
         singleEstime = (TextView)findViewById(R.id.singleEstime);
+        edit = (Button) findViewById(R.id.edit);
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SingleAssignment.this,UpdateAssignment.class);
+                intent.putExtra("TaskId",task_key);
+                startActivity(intent);
+
+            }
+        });
 
         mDatabase.child(task_key).addValueEventListener(new ValueEventListener() {
             @Override
