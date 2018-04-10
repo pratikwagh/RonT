@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -47,6 +48,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
+
+
+
 
         mTaskList = (RecyclerView) findViewById(R.id.task_list);
         mTaskList.setHasFixedSize(true);
@@ -185,6 +189,35 @@ return super.onOptionsItemSelected(item);
                 final String task_key = getRef(position).getKey().toString();
                 String[] ass_timestamp = new String[1];
 
+                String month,day,hr,min;
+                Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH) +1;
+                if (mMonth < 10 )
+                    month = "0" + String.valueOf(mMonth);
+                else
+                    month=String.valueOf(mMonth);
+
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                if (mDay < 10 )
+                    day = "0" + String.valueOf(mDay);
+                else
+                    day=String.valueOf(mDay);
+
+                int mHr=c.get(Calendar.HOUR_OF_DAY);
+                if (mHr < 10 )
+                    hr = "0" + String.valueOf(mHr);
+                else
+                    hr=String.valueOf(mHr);
+                int mMin=c.get(Calendar.MINUTE);
+                if (mMin < 10 )
+                    min = "0" + String.valueOf(mMin);
+                else
+                    min=String.valueOf(mMin);
+
+                String currenttimestamp = String.valueOf(mYear) + month + day + hr + min;
+
+                Log.d("currenttimestamp",currenttimestamp);
                ass_timestamp = check(task_key);
 
                 //populating the recycler view

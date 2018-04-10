@@ -22,6 +22,8 @@ public class OnTimePlanner extends AppCompatActivity {
 
         calendarView=(CalendarView)findViewById(R.id.cal);
 
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
@@ -32,6 +34,8 @@ public class OnTimePlanner extends AppCompatActivity {
 
                 //grtting day of week
                 Calendar calendar = Calendar.getInstance();
+
+                calendar.set(2018, 4, 15);
                 calendar.set(i, i1, i2);
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
