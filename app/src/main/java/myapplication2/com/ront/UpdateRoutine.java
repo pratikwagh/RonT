@@ -138,135 +138,121 @@ public class UpdateRoutine extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (awesomeValidation.validate()) {
-                    addClicked(view);
+                nme = tname.getText().toString();
+                start = set_stime.getText().toString();
+                end = set_etime.getText().toString();
+
+
+                delete();
+
+                flag=0;
+                Log.d("checkpoint","1");
+
+
+                if (bst >= bet)
+                {
+                    Toast.makeText(getApplicationContext(), "Start time should be less than End Time",
+                            Toast.LENGTH_LONG).show();
+                    Log.d("checkpoint","2");
+
+                    return;
                 }
+
+
+                database.getInstance().getReference().child(u).child(j).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        Log.d("slotClash","2");
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            Log.d("slotClash", "3");
+
+
+                            int start = Integer.parseInt(snapshot.child("start").getValue().toString());
+                            Log.d("slotClash", "4");
+                            int end = Integer.parseInt(snapshot.child("end").getValue().toString());
+
+                            Log.d("slotClash", "" + start + " " + end);
+
+                            if (bst > start && bst < end) {
+
+                                Log.d("slotClash", "5");
+                                flag = 1;
+                            }
+
+                            if (bet > start && bet < end) {
+                                Log.d("slotClash", "6");
+                                flag = 1;
+                            }
+
+
+
+                            if (bst <= start && bet >= end) {
+                                flag = 1;
+                            }
+
+
+                            Log.d("checkpoint","3");
+                        }
+
+
+                        if (awesomeValidation.validate() && flag !=1) {
+
+                            Log.d("checkpoint","5");
+
+                            //tname     = (EditText) findViewById(R.id.set_name);
+                            String name = tname.getText().toString();
+                            String stime = set_stime.getText().toString();
+                            String etime = set_etime.getText().toString();
+
+                            Log.d("RoutineCreatorDebug", "open database");
+
+                            myRef = database.getInstance().getReference().child(u).child(j);
+                            Log.d("blank",nme);
+                            Log.d("blank",start);
+                            Log.d("blank",end);
+
+                            DatabaseReference newTask = myRef.push();
+                            newTask.child("name").setValue(nme);
+                            newTask.child("date").setValue(start);
+                            newTask.child("time").setValue(end);
+
+                            //extra time field for easy computation
+                            newTask.child("start").setValue(bst);
+                            newTask.child("end").setValue(bet);
+
+
+                            Log.d("RoutineCreatorDebug", "push database");
+
+
+                            Intent intent = new Intent(UpdateRoutine.this, RoutineActivity.class);
+                            intent.putExtra("value", value);
+                            // intent.putExtra("TaskId",taskid);
+                            //intent.putExtra("Weekday",j);
+                            startActivity(intent);
+
+                }
+                else
+                        {
+                            Log.d("slotClash","if");
+
+                            Toast.makeText(getApplicationContext(), "This time slot is in use. Please choose an empty time slot.",
+                                    Toast.LENGTH_LONG).show();
+                            Log.d("checkpoint","4");
+
+                            return;
+                        }
             }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
         });
 
     }
 
-    public void addClicked(View view){
-
-        nme = tname.getText().toString();
-        start = set_stime.getText().toString();
-        end = set_etime.getText().toString();
-
-
-        delete();
-
-        flag=0;
-        Log.d("checkpoint","1");
-
-
-        if (bst >= bet)
-        {
-            Toast.makeText(getApplicationContext(), "Start time should be less than End Time",
-                    Toast.LENGTH_LONG).show();
-            Log.d("checkpoint","2");
-
-            return;
-        }
-
-
-        database.getInstance().getReference().child(u).child(j).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Log.d("slotClash","2");
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    Log.d("slotClash", "3");
-
-
-                    int start = Integer.parseInt(snapshot.child("start").getValue().toString());
-                    Log.d("slotClash", "4");
-                    int end = Integer.parseInt(snapshot.child("end").getValue().toString());
-
-                    Log.d("slotClash", "" + start + " " + end);
-
-                    if (bst > start && bst < end) {
-
-                        Log.d("slotClash", "5");
-                        flag = 1;
-                    }
-
-                    if (bet > start && bet < end) {
-                        Log.d("slotClash", "6");
-                        flag = 1;
-                    }
-
-
-
-                    if (bst <= start && bet >= end) {
-                        flag = 1;
-                    }
-
-
-                    Log.d("checkpoint","3");
-                }
-
-                if(flag==1)
-                {
-
-                    Log.d("slotClash","if");
-
-                    Toast.makeText(getApplicationContext(), "This time slot is in use. Please choose an empty time slot.",
-                            Toast.LENGTH_LONG).show();
-                    Log.d("checkpoint","4");
-
-                    return;
-
-                }
-                else {
-                    Log.d("checkpoint","5");
-
-                    //tname     = (EditText) findViewById(R.id.set_name);
-                    String name = tname.getText().toString();
-                    String stime = set_stime.getText().toString();
-                    String etime = set_etime.getText().toString();
-
-                    Log.d("RoutineCreatorDebug", "open database");
-
-                    myRef = database.getInstance().getReference().child(u).child(j);
-                    Log.d("blank",nme);
-                    Log.d("blank",start);
-                    Log.d("blank",end);
-
-                    DatabaseReference newTask = myRef.push();
-                    newTask.child("name").setValue(nme);
-                    newTask.child("date").setValue(start);
-                    newTask.child("time").setValue(end);
-
-                    //extra time field for easy computation
-                    newTask.child("start").setValue(bst);
-                    newTask.child("end").setValue(bet);
-
-
-                    Log.d("RoutineCreatorDebug", "push database");
-
-
-                    Intent intent = new Intent(UpdateRoutine.this, RoutineActivity.class);
-                    intent.putExtra("value", value);
-                   // intent.putExtra("TaskId",taskid);
-                    //intent.putExtra("Weekday",j);
-                    startActivity(intent);
-
-                }
-
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
         });
-
-
-
-
-
     }
 
     public void delete() {

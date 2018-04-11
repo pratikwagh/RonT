@@ -86,13 +86,14 @@ public class AddTask extends AppCompatActivity implements View.OnClickListener {
 
         set_time = (TextView) findViewById(R.id.set_time);
         set_date = (TextView) findViewById(R.id.set_date);
+
         currentTime = Calendar.getInstance();
         hour= currentTime.get(Calendar.HOUR_OF_DAY);
         minute= currentTime.get(Calendar.MINUTE);
         year=currentTime.get(Calendar.YEAR);
         month=currentTime.get(Calendar.MONTH);
         day=currentTime.get(Calendar.DAY_OF_MONTH);
-        month=month+1;
+        month=month;
 
 
 

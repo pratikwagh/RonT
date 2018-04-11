@@ -4,18 +4,19 @@ package myapplication2.com.ront;
  * Created by user on 7/3/18.
  */
 public class Task {
-    private String name,time,date;
+    private String name,time,date,Timestamp;
 
     public Task(){
 
 
     }
 
-    public Task(String name,String time,String date){
+    public Task(String name,String time,String date,String Timestamp){
 
         this.name=name;
         this.date=date;
         this.time=time;
+        this.Timestamp=Timestamp;
     }
 
     public String getTime() {
@@ -30,6 +31,8 @@ public class Task {
         return name;
     }
 
+    public String getTimestamp() {return Timestamp;}
+
     public void setTime(String time) {
         this.time = time;
     }
@@ -41,4 +44,6 @@ public class Task {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setTimestamp(String Timestamp) { this.Timestamp = Timestamp; }
 }

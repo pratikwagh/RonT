@@ -549,10 +549,10 @@ public class onPlannerDate extends AppCompatActivity {
 
                     }
 
-
+                    totalTime=(24*60)-totalTime;
 
                     //setting totAL Time on text view
-                    tt.setText("Today You have "+(totalTime/60)+":"+(totalTime%60)+" hours of free time.");
+                    tt.setText("You have "+(totalTime/60)+":"+(totalTime%60)+" hours of free time.");
                     Log.d("plln","total time:"+totalTime);
 
                 }

@@ -71,37 +71,40 @@
                 android:textColor="#FFF" />
 
         </RelativeLayout>
+        <RadioGroup
+            android:id="@+id/rgp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginTop="10dp">
 
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Routine" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Assignment" />
+        </RadioGroup>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/task_list"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="match_parent"
             android:visibility="visible">
 
         </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/upDate"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/bg_tv"
-            android:paddingBottom="10dp"
-
-            android:paddingTop="10dp"
-            android:text="Upcoming Assignment"
-            android:textColor="#FFF"
-            android:textAlignment="center"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/ass_list"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:visibility="visible">
-
-        </android.support.v7.widget.RecyclerView>
-
 
 
     </LinearLayout>

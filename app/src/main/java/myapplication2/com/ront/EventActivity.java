@@ -35,6 +35,8 @@ public class EventActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         mTaskList = (RecyclerView) findViewById(R.id.task_list);
         mTaskList.setHasFixedSize(true);
@@ -112,7 +114,7 @@ public class EventActivity extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent singleTaskActivity = new Intent(EventActivity.this,SingleTask.class);
+                        Intent singleTaskActivity = new Intent(EventActivity.this,SingleRemainder.class);
                         singleTaskActivity.putExtra("TaskId",task_key);
                         startActivity(singleTaskActivity);
 

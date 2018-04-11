@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +30,8 @@
             android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LogoutActivity" />
-        <activity android:name=".EventActivity" />
+        <activity android:name=".EventActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".SingleTask" />
         <activity android:name=".AddTask" />
         <activity android:name=".RoutineCreate" />
@@ -47,8 +48,9 @@
             android:name=".AlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".AssignmentAdderActivity"
-            android:parentActivityName=".AssignmentView1"/>
+        <activity
+            android:name=".AssignmentAdderActivity"
+            android:parentActivityName=".AssignmentView1" />
         <activity android:name=".UpdateAssignment" />
         <activity android:name=".UpdateRoutine" />
         <activity
@@ -61,6 +63,7 @@
         <activity
             android:name=".onPlannerDate"
             android:parentActivityName=".HomeActivity" />
+        <activity android:name=".SingleRemainder"></activity>
     </application>
 
 </manifest>
