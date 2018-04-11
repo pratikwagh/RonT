@@ -585,7 +585,7 @@ public class onPlannerDate extends AppCompatActivity {
                     esti = Integer.parseInt(snapshot.child("Estime").getValue().toString());
                     String ts = snapshot.child("Timestamp").getValue().toString();
                     String name = snapshot.child("name").getValue().toString();
-
+/*
                     int datex = Integer.parseInt(ts.substring(6, 7));
                     int yrx = Integer.parseInt(ts.substring(0, 3));
                     int monx = Integer.parseInt(ts.substring(4, 5));
@@ -595,10 +595,10 @@ public class onPlannerDate extends AppCompatActivity {
 
                     //calculating total minutes
                     int timex = (hrx * 60) + minx;
-
+*/
 
                     //calling function to get name of day
-                    String dnx = getDayName(monx, datex, yrx);
+  //                  String dnx = getDayName(monx, datex, yrx);
 
 
 
