@@ -47,7 +47,8 @@
             android:name=".AlarmReceiver"
             android:process=":remote" />
 
-        <activity android:name=".AssignmentAdderActivity" />
+        <activity android:name=".AssignmentAdderActivity"
+            android:parentActivityName=".AssignmentView1"/>
         <activity android:name=".UpdateAssignment" />
         <activity android:name=".UpdateRoutine" />
         <activity

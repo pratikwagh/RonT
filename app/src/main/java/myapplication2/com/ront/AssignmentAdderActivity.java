@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +67,11 @@ public class AssignmentAdderActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         u=user.getUid();
 
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         AssName = (EditText) findViewById(R.id.ass_name);
         DeadDate = (EditText) findViewById(R.id.set_dtime);
